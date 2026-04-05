@@ -1,0 +1,57 @@
+@import url('https://fonts.cdnfonts.com/css/proxima-nova-2');
+
+@font-face {
+  font-family: 'vitro';
+  src: url('/src/assets/font/VITRO CORE TTF.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'NotoSansKRCustom';
+  src: url('https://fonts.gstatic.com/s/notosanskr/v39/PbykFmXiEBPT4ITbgNA5Cgm20xz64px_1hVWr0wuPNGmlQNMEfD4.0.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-size: var(--font-size);
+  font-family: 'Proxima Nova', sans-serif;
+  color: var(--font-color);
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: var(--font-color);
+}
+
+ul, ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+button:focus-visible {
+  outline: none;
+}
+
+textarea {
+  resize: none;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--main-color);
+  border-radius: 4px;
+}

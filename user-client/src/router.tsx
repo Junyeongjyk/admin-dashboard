@@ -11,7 +11,6 @@ import MessageList from "./pages/MessageList/MessageList";
 import Setting from "./pages/Setting/Setting";
 import Community from "./pages/Community/Community";
 import Terms from "./pages/Terms/Terms";
-
 import axios from "axios";
 
 export default function Router() {
@@ -27,7 +26,6 @@ export default function Router() {
     }
   }, []);
 
-  // ✅ init (Svelte onMount)
   useEffect(() => {
     if (!isLoggedIn) return;
 
