@@ -1,0 +1,25 @@
+// src/styles/mixins.scss
+
+// flex
+@mixin flex($justify: center, $align: center) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+// 반응형
+@mixin mobile {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+// 버튼
+@mixin button($bg: var(--main-color)) {
+  background: $bg;
+  border: 1px solid $bg;
+  color: var(--background);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
