@@ -16,11 +16,26 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
+    /* ✅ 여기 추가 (alias 핵심) */
+    "baseUrl": ".",
+    "paths": {
+      "src/*": ["src/*"],
+      "assets/*": ["src/assets/*"],
+      "components/*": ["src/components/*"],
+      "utils/*": ["src/utils/*"],
+      "pages/*": ["src/pages/*"],
+      "styles/*": ["src/styles/*"],
+      "stores/*": ["src/stores/*"],
+      "services/*": ["src/services/*"],
+      "constants/*": ["src/constants/*"],
+      "interfaces/*": ["src/interfaces/*"],
+      "types/*": ["src/types/*"]
+    },
+
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },

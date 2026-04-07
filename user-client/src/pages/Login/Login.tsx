@@ -5,6 +5,7 @@ import { createKey, encrypt, getDecryptData } from "src/utils/aes.utils";
 import { createDeviceId, getCookie, setCookie, got } from "src/utils/helpers";
 import { ApiPath } from "src/types/enum/apiEnum";
 import "./Login.scss";
+
 export default function Login() {
   const navigate = useNavigate();
 
