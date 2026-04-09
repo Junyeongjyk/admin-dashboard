@@ -1,0 +1,492 @@
+.header.fixed { //메인화면 전용 헤더 스타일
+  position: fixed;
+  // width: calc(100% - 6px);
+  width: calc(100% - 0px);
+  background: none;
+
+  .header__logo img, i.fa-solid {
+    transition: filter 0.4s ease, color 0.4s ease;
+  }
+
+  &.light {
+
+    .header__logo img {
+      filter: var(--logo-filter);
+    }
+
+    i.fa-solid {
+      color: #fff;
+    }
+  }
+
+  &.dark {
+    background: var(--background);
+    
+    .header__logo img {
+      filter: var(--none-filter);
+    }
+
+    i.fa-solid {
+      color: var(--font-color);
+    }
+  }
+}
+
+.header-main-bg {
+  background: var(--background) !important;
+
+  .header__logo img {
+    filter: var(--none-filter) !important;
+  }
+
+  i.fa-solid {
+    color: var(--font-color) !important;
+  }
+}
+
+.header {
+  z-index: 1;
+  top: 0;
+  width: 100%;
+  height: 88px;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.4s ease, color 0.4s ease;
+  background: var(--background);
+
+  &.signup-flow {
+    .wrap {
+      max-width: 768px;
+    }
+  }
+
+  .wrap {
+    height: 88px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 0 !important;
+  }
+
+  &__logo {
+    height: 48px;
+
+    img {
+      width: auto;
+      height: 100%;
+      filter: var(--none-filter);
+    }
+  }
+
+  &__sign {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    button {
+      height: 48px;
+      border-radius: 50px;
+      font-size: 16px;
+    }
+
+    &__menu {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .fa-solid, .fa-regular {
+      font-size: 42px;
+      cursor: pointer;
+    }
+
+    &__signin {
+      border: 2px solid var(--main-color);
+      width: 118px;
+      color: var(--main-color);
+      background: var(--background);
+    }
+
+    &__signup {
+      width: 134px;
+      background: var(--main-color);
+      color: var(--background);
+    }
+  }
+
+  .back {
+    button {
+      width: 48px;
+      height: 48px;
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--back-btn);
+      border: 0;
+
+      i {
+        color: var(--main-color);
+        font-size: 18px;
+      }
+    }
+  }
+
+  .bell {
+    position: relative;
+    width: 36.9px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    i {
+      position: absolute;
+    }
+
+    .blink {
+      position: absolute;
+      top: -20px;
+      right: 0;
+      background: var(--red);
+      width: 20px;
+      height: 20px;
+      color: #fff;
+      font-weight: normal;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 20px;
+      animation: blink .5s infinite;
+    }
+  }
+}
+
+.hamburger {
+  cursor: pointer;
+  width: 31.64px;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  i {
+      position: absolute;
+      transition: 
+      opacity 0.25s ease,
+      transform 0.25s ease;
+  }
+}
+
+.cover {
+  position: fixed;
+  top: 88px;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,.4);
+  z-index: 51;
+}
+
+.mobile-menu {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: calc( 100vh - 88px );
+  padding: 1rem;
+  list-style: none;
+
+  &__name {
+    width: 100%;
+    height: 40px;
+    width: calc( 650px + 1rem);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    p {
+      font-size: 16px;
+    }
+
+    button {
+      width: 90px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50px;
+      font-size: 1rem;
+    }
+
+    .fa-user-secret {
+      color: var(--main-color);
+    }
+  }
+
+  &__ul {
+    margin-top: 50px;
+    width: calc( 650px + 1rem);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    li {
+      width: 100%;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+     
+      a {
+        color: var(--main-color);
+        font-size: 16px;
+      }
+
+      i {
+        display: none;
+      }
+    }
+  }
+}
+
+
+.mobile-menu, .alarm-menu {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: calc( 100vh - 88px );
+  background: var(--background);
+  padding: 1rem;
+  list-style: none;
+
+  &__name {
+    width: 100%;
+    height: 40px;
+    width: calc( 650px + 1rem);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    p {
+      font-size: 16px;
+    }
+
+    button {
+      width: 90px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50px;
+      font-size: 1rem;
+    }
+  }
+
+  &__ul {
+    margin-top: 50px;
+    width: calc( 650px + 1rem);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    li {
+      width: 100%;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+     
+      a {
+        color: var(--main-color);
+        font-size: 16px;
+      }
+
+      i {
+        display: none;
+      }
+    }
+  }
+}
+
+.alarm-menu {
+
+  &__name {
+    width: 100%;
+    height: 40px;
+    width: calc( 650px + 1rem);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__ul {
+    margin-top: 50px;
+    width: calc( 650px );
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    li {
+      width: 100%;
+      height: 40px;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      
+      .info {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+     
+      p {
+        color: var(--main-color);
+        font-size: 16px;
+      }
+
+      i {
+        display: flex;
+        font-size: 20px;
+        color: var(--main-color);
+      }
+
+      button {
+        width: 79px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        font-size: 1rem;
+        font-weight: normal;
+      }
+    }
+  }
+}
+
+
+header.type {
+  width: 884px;
+  margin: auto;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .mobile-menu__name {
+    width: 100% !important;
+  }
+  .mobile-menu__ul {
+    width: 100% !important;
+  }
+  
+}
+
+@media screen and (max-width: 800px) {
+  header.type {
+    width: 100%;
+    margin: auto;
+  }
+
+  .header {
+    &.signup-flow {
+      .wrap {
+        max-width: 100%;
+      }
+    }
+    .wrap {
+      padding: 0 1rem;
+    }
+
+    &__logo {
+      height: 32px;
+    }
+
+     &__sign {
+
+      button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 32px;
+        font-size: 12px;
+      }
+
+      .fa-solid, .fa-regular {
+        font-size: 28px;
+        cursor: pointer;
+      }
+
+      &__signin {
+        width: 80px;
+      }
+
+      &__signup {
+        width: 90px;
+      }
+     }
+  }
+
+  .mobile-menu, .alarm-menu {
+    width: 100%;
+
+    &__name {
+      width: 100%;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      p {
+        font-size: 16px;
+      }
+
+      button {
+        width: 90px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50px;
+        font-size: 1rem;
+      }
+    }
+
+    &__ul {
+      margin-top: 50px;
+      width: calc( 100% );
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      li {
+        width: 100%;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+      
+        a {
+          color: var(--main-color);
+          font-size: 16px;
+        }
+
+        i {
+          display: none;
+        }
+      }
+    }
+  }
+}
