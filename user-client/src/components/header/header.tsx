@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion'; // Svelte transition 대용
-import { useUserStore } from "src/stores/userStore"; // 앞서 만든 Zustand 스토어
+import { userStore } from "src/stores/userStore"; // 앞서 만든 Zustand 스토어
 import { useSignupStore } from "src/stores/signupStore"; 
 import { menus, getMenusByUserType } from "constants/layout";
 import { popup } from "utils/popup";
-import { deleteCookie, getAccessToken, getCookie, got } from "src/utils/helpers";
+import { deleteCookie, got } from "src/utils/helper";
 import { ApiPath } from "src/types/enum/apiEnum";
 import { SignupType } from "src/types/enum/userEnum";
-import { AlamStatus } from "src/types/enum/requestsEnum";
 import "./Header.scss";
 
 interface HeaderProps {
@@ -28,7 +27,7 @@ const Header: React.FC<HeaderProps> = ({
     const location = useLocation();
 
     // Zustand 스토어 구독 (Svelte의 $구독 대용)
-    const { userInfo, setUserInfo } = useUserStore();
+    const { userInfo, setUserInfo } = userStore();
     const isLoggedIn = !!userInfo; 
     const isSignupFlow = useSignupStore((state) => state.isSignupFlow);
 
