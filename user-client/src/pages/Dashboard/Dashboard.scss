@@ -1,0 +1,89 @@
+.dashboard-container {
+    width: 100%;
+    height: 100vh; // 대쉬보드 자체를 화면에 고정
+    overflow-y: hidden; // Fullpage 구현을 위해 기본 스크롤은 가림
+    position: relative;
+    background: #f4f7fa;
+
+    .fullpage-section {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        .section-content {
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
+            text-align: center;
+        }
+    }
+
+    // 내부 스크롤 박스 스타일
+    .scroll-box {
+        width: 400px;
+        height: 300px;
+        background: white;
+        border: 1px solid #ddd;
+        overflow-y: auto;
+        padding: 20px;
+        margin: 0 auto;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+
+        p {
+            margin: 10px 0;
+            color: #666;
+        }
+    }
+
+    // 페이지 도트
+    .page-dots {
+        position: fixed;
+        right: 30px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        z-index: 999;
+
+        span {
+            width: 12px;
+            height: 12px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            &.active {
+                background: #3b82f6; // 포인트 컬러
+                transform: scale(1.5);
+            }
+        }
+    }
+
+    .placeholder {
+        font-size: 3rem;
+        font-weight: bold;
+        color: #333;
+    }
+}
+
+// 모바일: Fullpage 해제하고 일반 스크롤로 변경
+@media (max-width: 800px) {
+    .dashboard-container {
+        height: auto;
+        overflow-y: visible;
+
+        .fullpage-section {
+            height: auto;
+            min-height: 100vh;
+        }
+
+        .page-dots {
+            display: none;
+        }
+    }
+}

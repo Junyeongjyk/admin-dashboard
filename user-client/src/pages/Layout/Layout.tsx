@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { SignupType } from "src/types/enum/userEnum";
 import type { UserItem } from "src/types/user.type";
 import { userStore } from "src/stores/userStore";
 import Header from "components/header/header";
 import LoadingBar from "./LoadingBar";
 import Mobile from "components/MobileButton/Mobile";
-import MainPage from "../MainPage/MainPage";
-import Footer from "src/components/Footer/footer";
+import Footer from "src/components/Footer/Footer";
 import ChatWidget from "./import/ChatWidget";
 import "./Layout.scss";
 
@@ -23,154 +22,31 @@ const Layout: React.FC<LayoutProps> = ({
     pageType = "", 
     children 
 }) => {
-    // 상태 관리
     const [userInfo, setUserInfo] = useState<UserItem | null>(null);
-    const [isLoading, setIsLoading] = useState(false);
-    const [current, setCurrent] = useState(0);
-    const [isDarkHeader, setIsDarkHeader] = useState(false);
-    const [isDarkSection, setIsDarkSection] = useState(false);
-    const [isAnimating, setIsAnimating] = useState(false);
-    const [pageCount, setPageCount] = useState(0);
+    const [isLoading] = useState(false); // 로딩 상태 제어 필요 시 활용
 
-    // DOM 참조
-    const containerRef = useRef<HTMLDivElement>(null);
-    const scrollTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-    // 유저 정보 구독 (Svelte store 대응)
+    // 유저 정보 구독
     useEffect(() => {
         const unsubscribe = userStore.subscribe((value) => setUserInfo(value));
         return () => unsubscribe();
     }, []);
 
-    const isPC = () => window.innerWidth >= 800;
-
-    const getSectionHeight = useCallback(() => {
-        const section = containerRef.current?.querySelector(".fullpage") as HTMLElement;
-        return section?.offsetHeight || window.innerHeight;
-    }, []);
-
-    const scrollTo = useCallback((index: number) => {
-        const container = containerRef.current;
-        const pages = container?.querySelectorAll(".fullpage");
-        if (!container || !pages || !pages[index]) return;
-
-        setIsAnimating(true);
-        setCurrent(index);
-
-        const target = index * getSectionHeight();
-        const start = container.scrollTop;
-        const duration = 700;
-        let startTime: number;
-
-        const animate = (time: number) => {
-            if (!startTime) startTime = time;
-            const progress = Math.min((time - startTime) / duration, 1);
-
-            // easeInOut Quintic (Svelte의 수식 유지)
-            const ease = progress < 0.5
-                ? 2 * progress * progress
-                : 1 - Math.pow(-2 * progress + 2, 2) / 2;
-
-            container.scrollTop = start + (target - start) * ease;
-
-            if (progress < 1) {
-                requestAnimationFrame(animate);
-            } else {
-                setIsAnimating(false);
-            }
-        };
-
-        requestAnimationFrame(animate);
-        setIsDarkHeader(index !== 1);
-    }, [getSectionHeight]);
-
-    const handleContainerScroll = useCallback(() => {
-        if (scrollTimer.current) clearTimeout(scrollTimer.current);
-
-        scrollTimer.current = setTimeout(() => {
-            const container = containerRef.current;
-            if (!container) return;
-
-            let section = 0;
-            if (isPC()) {
-                section = Math.round(container.scrollTop / getSectionHeight());
-            } else {
-                section = Math.floor(window.scrollY / window.innerHeight);
-            }
-
-            setIsDarkHeader(section !== 1);
-            setIsDarkSection(section !== 1);
-        }, 0);
-    }, [getSectionHeight]);
-
-    const onWheel = useCallback((e: WheelEvent) => {
-        if (!isPC() || isAnimating) return;
-        
-        e.preventDefault();
-        const pages = containerRef.current?.querySelectorAll(".fullpage");
-        if (!pages) return;
-
-        if (e.deltaY > 0 && current < pages.length - 1) {
-            scrollTo(current + 1);
-        } else if (e.deltaY < 0 && current > 0) {
-            scrollTo(current - 1);
-        }
-    }, [current, isAnimating, scrollTo]);
-
-    // 이벤트 리스너 등록
-    useEffect(() => {
-        if (mainType !== "main") return;
-
-        const container = containerRef.current;
-        if (!container) return;
-
-        // 초기 페이지 개수 계산
-        setPageCount(container.querySelectorAll(".fullpage").length);
-        handleContainerScroll();
-
-        if (isPC()) {
-            container.addEventListener("wheel", onWheel, { passive: false });
-            container.addEventListener("scroll", handleContainerScroll);
-        } else {
-            window.addEventListener("scroll", handleContainerScroll);
-        }
-
-        return () => {
-            if (isPC()) {
-                container.removeEventListener("wheel", onWheel);
-                container.removeEventListener("scroll", handleContainerScroll);
-            } else {
-                window.removeEventListener("scroll", handleContainerScroll);
-            }
-        };
-    }, [mainType, onWheel, handleContainerScroll]);
-
-    // 메인 레이아웃 렌더링
+    // 메인 레이아웃 (대쉬보드 등 풀페이지 컴포넌트가 children으로 들어올 때)
     if (mainType === "main") {
         return (
-            <div 
-                ref={containerRef}
-                className={`container fullpage-container ${userInfo?.type === SignupType.DETECTIVE ? 'detective' : ''}`}
-            >
-                {type === 0 && <Header isDark={isDarkHeader} fixedType="fixed" mainType={mainType} />}
-                {type === 2 && <Header type={2} isDark={isDarkHeader} fixedType="fixed" mainType={mainType} />}
+            <div className={`container fullpage-container ${userInfo?.type === SignupType.PARTNER ? 'partner' : ''}`}>
+                {/* 헤더: 스크롤에 따른 다크모드 제어는 이제 Header 내부나 각 페이지에서 prop으로 전달받아야 함 */}
+                {type === 0 && <Header fixedType="fixed" mainType={mainType} />}
+                {type === 2 && <Header type={2} fixedType="fixed" mainType={mainType} />}
                 
-                <MainPage />
+                {/* MainPage가 고정으로 들어가는 구조라면 유지, 아니라면 children만 둡니다 */}
+                {/* <MainPage /> */}
+                
                 <LoadingBar isLoading={isLoading} />
+                
+                {/* 대쉬보드에서 구현한 풀페이지 스크롤 컴포넌트가 이 위치에 렌더링됩니다 */}
                 {children}
 
-                {isPC() && pageCount > 1 && (
-                    <div className={`page-dots ${isDarkSection ? 'dark' : 'light'}`}>
-                        {Array.from({ length: pageCount }).map((_, i) => (
-                            <span 
-                                key={i}
-                                className={i === current ? 'active' : ''} 
-                                onClick={() => scrollTo(i)} 
-                            />
-                        ))}
-                    </div>
-                )}
-                
                 <Footer userInfo={userInfo} mainType={mainType} />
                 <Mobile />
                 {userInfo && <ChatWidget />}
@@ -178,12 +54,9 @@ const Layout: React.FC<LayoutProps> = ({
         );
     }
 
-    // 일반 레이아웃 렌더링
+    // 일반 레이아웃 (서브 페이지용)
     return (
-        <div 
-            ref={containerRef}
-            className={`container ${userInfo?.type === SignupType.DETECTIVE ? 'detective' : ''}`}
-        >
+        <div className={`container ${userInfo?.type === SignupType.PARTNER ? 'partner' : ''}`}>
             {type === 0 && <Header />}
             {type === 2 && <Header type={2} />}
             
