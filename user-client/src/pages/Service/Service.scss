@@ -1,0 +1,144 @@
+
+.service {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // flex-direction: column;
+
+    &__inner {
+        max-width: 1280px;
+        width: 100%;
+        text-align: center;
+        font-weight: normal;
+        padding: 0 2rem;
+    }
+
+    h2 {
+        width: 100%;
+        font-weight: normal;
+        font-size: 3rem;
+        color: var(--main-color);
+        line-height: 1;
+        margin-bottom: 1.5rem;
+    }
+
+    .btn-group {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        margin-top: 5rem;
+    }
+
+    .service-btn {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        // height: 80px;
+        // gap: 0.75rem;
+        gap: 1rem;
+        padding: 1rem;
+        border-radius: 14px;
+        // border: 1px solid #ddd;
+        border: 0;
+        box-shadow: var(--box-shadow-mid);
+        background: var(--service-btn);
+        backdrop-filter: blur(6px);
+        transition: all 0.3s;
+        cursor: pointer;
+
+        i {
+            background: var(--background);
+            padding: 1.5rem;
+            border-radius: 50px;
+            font-size: 1.5rem;
+            color: var(--main-color);
+            box-shadow: var(--box-shadow-min);
+        }
+
+        .num {
+            font-weight: 700;
+            color: #999;
+        }
+
+        .text {
+            width: 100%;
+            font-weight: 600;
+            text-align: center;
+            color: var(--font-color-txt);
+            font-size: 1rem;
+        }
+
+        &::before {
+            content: '의뢰하기';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            background: var(--background);
+            color: var(--main-color);
+            font-weight: 1000;
+            font-size: 1.2rem;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+
+        &.not-login::before {
+            content: '로그인해주세요';
+        }
+
+        &.detective {
+            &::before {
+                content: '내 업무';
+            }
+        }
+        &:hover {
+            &::before {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .service {
+        margin: 108px 0 1rem 0;
+        height: 100%;
+        // height: calc( 100vh + 200px);
+
+        h2 {
+            font-size: 2.5rem;
+        }
+        
+        &__inner {
+            height: 100%;
+            padding: 0 0rem;
+        }
+
+        .btn-group {
+            height: 100%;
+            gap: 1rem;
+            grid-template-columns: repeat(2, 1fr);
+
+            .service-btn {
+                // height: 60px;
+                padding: 1rem 1rem 1rem 1rem;
+
+                 .text {
+                    // text-align: start;
+                    font-size: var(--font-size);
+                 }
+            }
+        }
+
+    }
+}
