@@ -38,7 +38,7 @@ export class TokenAuthGuard implements CanActivate {
                     throw new ForbiddenException('허용되지 않은 요청입니다.');
                 }
 
-                if (user.userType == UserType.DETECTIVE) {
+                if (user.userType == UserType.PARTNER) {
                     const profile = await this.partnerProfilesRepository.createQueryBuilder('profile')
                         .where('profile.userId = :userId', {userId: user.id})
                         .getOne()

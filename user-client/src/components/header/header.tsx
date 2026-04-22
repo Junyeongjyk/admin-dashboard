@@ -131,7 +131,7 @@ const Header: React.FC<HeaderProps> = ({
                                 onClick={(e) => e.stopPropagation()}
                             >
                                 <div className="mobile-menu__name">
-                                    <p>안녕하세요. <b>{userInfo?.name} {userInfo?.type === 'DETECTIVE' && <i className="fa-solid fa-user-secret"></i>}</b> 님</p>
+                                    <p>안녕하세요. <b>{userInfo?.name} {userInfo?.type === 'PARTNER' && <i className="fa-solid fa-user-secret"></i>}</b> 님</p>
                                     <button className="logout" onClick={signout}>로그아웃</button>
                                 </div>
                                 <ul className="mobile-menu__ul">
@@ -185,7 +185,7 @@ const Header: React.FC<HeaderProps> = ({
                 ${fixedType === "fixed" ? 'fixed' : ''}
                 ${mainType !== "main" && (isMenuOpen || isAlarmOpen) ? 'fixed-bg' : ''}
                 ${mainType === "main" && (isMenuOpen || isAlarmOpen) ? 'header-main-bg' : ''}
-                ${userInfo?.type === 'DETECTIVE' ? 'detective' : ''}
+                ${userInfo?.type === 'PARTNER' ? 'partner' : ''}
             `}>
                 <div className="wrap">
                     {type === 2 && (
