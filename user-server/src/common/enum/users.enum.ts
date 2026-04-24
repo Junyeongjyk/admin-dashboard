@@ -8,3 +8,8 @@ export enum UserType {
   PARTNER = 'PARTNER', //탐정
   ADMIN = 'ADMIN', //관리자
 }
+
+export enum Gender {
+  MALE = 'MALE',
+  FEMALE = 'FEMALE',
+}
