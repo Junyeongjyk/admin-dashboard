@@ -1,4 +1,4 @@
-import "./TermsList";
+import TermsList from "./TermsList";
 import "./Layout.scss";
 
 export default function Terms() {
