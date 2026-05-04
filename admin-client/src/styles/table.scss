@@ -1,0 +1,245 @@
+.table {
+    width: 100%;
+    overflow-x: auto;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-color);
+
+    table {
+        border-collapse: collapse;    
+        white-space: nowrap;
+        width: 100%;
+        text-align: left;
+
+        th{
+            background-color: var(--main-color);
+            text-align: center;
+            padding: 0.62rem 1.6rem;
+            font-weight: 400;
+            color: var(--font-color-light);
+        }
+    }
+}
+
+.table.style {
+    table {
+        thead {
+            border: 0;
+        }
+
+        th{
+            background-color: #D0D9EE;
+            text-align: center;
+            padding: 0.62rem 1.6rem;
+            font-weight: 400;
+            color: #000;
+            border: 0px solid #000;
+            border-top: 0px;
+            border-bottom: 0px;
+        }
+    }
+}
+
+// tableTitleColumns 전용 스타일
+.thlist {
+    padding: 0rem 0.5rem !important;
+    text-align: center !important;
+    align-items: center;
+}
+
+
+th {
+    position: relative;
+    // font-size: 1rem;
+
+    .toggleIcon {
+        cursor: pointer;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0%;
+        right: 0%;
+        background: none;
+        border: none;
+    }
+    .up-down {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .th__group {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+       
+        &__line {
+            display: flex;
+            flex-direction: column;
+            margin-left: 5px;
+        }
+    }
+
+    .icon-group {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-left: 5px;
+
+        i {
+            font-size: 0.75rem;
+            // font-size: 0.9rem;
+            font-weight: 1000;
+        }
+
+        .up-long,
+        .down-long {
+            color: var(--initial); 
+            text-shadow: 0px 0px 5px #F2C94C;
+        }
+
+        .up-long {
+            transform: 
+            translate(0%, 28%);
+        }
+        .down-long {
+            transform: 
+            translate(0%, -28%);
+        }
+
+        .up-long.active,
+        .down-long.active {
+            color: #000;
+            // filter: brightness(2.5);
+        }
+    }
+}
+
+.table th input[type="checkbox"] {
+  pointer-events: auto;
+}
+
+.table th input[type="checkbox"] {
+  pointer-events: auto;
+}
+
+:global(.table.style table td) {
+    padding: 0.1rem 1rem;
+    height: 50px;
+    border-bottom: 1px solid var(--font-color-down);
+    text-align: center;
+}
+:global(.table.style table td button) {
+    border-color: #8CBBE3;
+    color: #8CBBE3;
+}
+
+:global(.table table td) {
+    // padding: 0.62rem 1rem;
+    padding: 0.1rem 1rem;
+    height: 40px;
+    border-bottom: 1px solid var(--font-color-down);
+    text-align: center;
+}
+
+:global(.table table tr) {
+    transition: all 0.3s;
+    // background: var(--card);
+}
+  
+:global(.table table tr:hover) {
+    background-color: var(--table-color) !important;
+}
+  
+// :global(.table table tr:nth-child(2n)) {
+//     background-color: var(--card);
+// }
+  
+// :global(.table table tr:nth-child(2n+1)) {
+//     background-color: var(--table-color);
+// }
+
+:global(.th-bg) {
+    background: var(--table-header);
+    color: #eee;
+}
+
+:global(th.checkbox) {
+    background: var(--table-header);
+    border-right: 1px solid var(--border-color);
+    padding: 0rem 2rem;
+    width: 30px;
+    transition: all 0.3s;
+    cursor: pointer;
+
+    &:hover {
+        filter: brightness(0.8);
+    }
+}
+
+:global(th.checkbox input) {
+    color: #000 !important;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0 !important;
+    border: 1px solid;
+    border-radius: 4px;
+    border-color: var(--border-color);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+    width: 15px;
+    height: 15px;
+    transition: text-indent 0.3s, border 0.3s;
+    cursor: pointer;
+}
+
+:global(td.checkbox) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0rem 1.5rem;
+    border-right: 1px solid var(--border-color);
+    cursor: pointer;
+}
+
+:global(td.checkbox input) {
+    color: #000 !important;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0 !important;
+    border: 1px solid;
+    border-radius: 4px;
+    border-color: var(--border-color);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+    width: 15px;
+    height: 15px;
+    transition: text-indent 0.3s, border 0.3s;
+    cursor: pointer;
+}
+
+:global(td.padding-0) {
+    padding: 0;
+}
+
+:global(td.start) {
+    text-align: start !important;
+}
+
+:global(td.end) {
+    text-align: end !important;
+}
+
+// :global(tr.border td) {
+//     border: 1px solid var(--main-color) !important;
+// }
+
+.tooltip {
+        position: absolute;
+        background-color: #fff8c4;
+        border: 1px solid #aaa;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 13px;
+        max-width: 300px;
+        box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        z-index: 1000;
+        pointer-events: none;
+        white-space: pre-wrap;
+    }
