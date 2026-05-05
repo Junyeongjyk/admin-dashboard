@@ -1,0 +1,105 @@
+.radio-inputs {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 100px;
+    border: 1px solid var(--border-color);
+    color: var(--font-color-down);
+    background: var(--card);
+    box-shadow: var(--box-shadow);
+    padding: 0.2rem;
+    height: fit-content;
+    width: fit-content;
+
+    &__radio {
+        flex: 1 1 auto;
+        text-align: center;
+
+        input {
+            display: none;
+        }
+
+        input:checked + &__name {
+            background-color: var(--main-color);
+            box-shadow: var(--box-shadow-small);
+            color: #fff;
+            font-weight: 600;
+        }
+
+        &__name{
+            display: flex;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            border-radius: 100px;
+            border: none;
+            padding: 0.7rem 1rem;
+            color: var(--font-color-dark);
+            transition: all .15s ease-in-out;
+
+            &:hover {
+                background-color: var(--main-color);
+                color: #fff;
+                font-weight: 600;
+            }
+        }
+    }
+}
+
+// 2024-09-10 티모 / 라디오 second-style 추가
+.radio-second-style {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ccc;
+    border: none;
+    border-radius: 20px;
+    padding: 5px;
+    cursor: pointer;
+    overflow: hidden;
+    width: 36px;
+    height: 22px;
+
+    &__radio {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        input {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .radio-second-style__radio__name {
+            display: inline-block;
+            width: 1rem;
+            height: 1.15em; 
+            border-radius: 11px;
+            cursor: pointer;
+            background-color: transparent; // 기본적으로 투명
+            transition: background-color 0.3s ease;
+        }
+
+        input:checked + .radio-second-style__radio__name {
+            background: none;
+        }
+    }
+
+    &__slider {
+        position: absolute;
+        top: 3px;
+        width: 1rem;
+        height: 1.15em; 
+        background-color: #fff;
+        border-radius: 11px;
+        transition: transform 0.4s ease-in-out, background-color 0.3s ease-in-out;
+
+        input:checked + & {
+            background-color: CornflowerBlue;
+            transform: translateX(14px); 
+        }
+    }
+}
+

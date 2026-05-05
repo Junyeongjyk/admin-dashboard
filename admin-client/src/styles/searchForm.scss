@@ -1,0 +1,124 @@
+.search-form {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    font-weight: normal;
+
+    &__div {
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+    }
+
+    &__group {
+        display: flex;
+        align-items: center;
+        gap: 4rem;
+    }
+
+    select {
+        padding: 0.4rem 0.75rem;
+        // margin-right: 4rem;
+    }
+
+    label {
+        margin-right: 0.76rem;
+    }
+
+    &__search {
+        display: flex;
+        align-items: center;
+        // overflow: hidden;
+        border-radius: 4px;
+
+        label {
+            color: var(--font-color-down);
+            min-width: fit-content;
+        }
+
+        &__wrap {
+            display: flex;
+            align-items: center;
+            
+            p {
+                margin-right: 1rem;
+            }
+            
+            input {
+                padding: 0.3rem 1rem;
+                margin-right: 0;
+            }
+            
+            &__button {
+                padding: 0.36rem 1rem;
+                font-size: 0.85rem;
+                min-height: 28.4px;
+            }
+        }
+    }
+}
+  
+.search-form {
+    .date-picker-wrap {
+        display: flex;
+        align-items: center;
+    }
+}
+  
+@media screen and (max-width: 978px) {
+    select {
+        width: 100%;
+        margin: 0 0 1rem 0 !important;
+    }
+
+    .date-picker-wrap {
+        margin-bottom: 1rem;
+    }
+
+    .search-form__search {
+        display: block;
+        width: 100%;
+
+        &__wrap {
+            width: 100%;
+        }
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .search-form {
+        .left {
+            margin-right: 0;
+        }
+    }
+
+    label {
+        margin-top: 1rem;
+    }
+    
+    select {
+        width: 100%;
+        margin: 0 0 1rem 0 !important;
+    }
+
+    select.company {
+        margin-right: 0 ;
+    }
+
+    .search-form__search {
+        display: block;
+        width: 100%;
+
+        &__wrap {
+            width: 100%;
+        }
+    }
+
+    .date-picker-wrap {
+        margin-bottom: 1rem;
+    }
+}
