@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ApiPath } from "src/types/enum/apiEnum";
 import { NoticesItem } from "src/types/notices.type";
-import { getAccessToken, got } from "src/utils/helpers";
+import { getAccessToken, got } from "src/utils/helper";
 
 // SCSS 임포트 (경로 확인 필요)
 import "../../../styles/form.scss";
