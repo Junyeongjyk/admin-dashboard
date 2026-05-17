@@ -11,14 +11,19 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "@nestjs/config": "^4.0.4",
     "@nestjs/jwt": "^11.0.2",
+    "@nestjs/swagger": "^11.4.3",
     "@nestjs/typeorm": "^11.0.1",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "ioredis": "^5.10.1",
     "mysql2": "^3.22.2",
     "passport-jwt": "^4.0.1",
-    "typeorm": "^0.3.28",
+    "pg": "^8.20.0",
+    "swagger-ui-express": "^5.0.1",
+    "typeorm": "^0.3.29",
     "validator": "^13.15.35"
   },
   "devDependencies": {
