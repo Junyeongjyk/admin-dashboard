@@ -9,6 +9,10 @@
 
     "esModuleInterop": true,
     "strict": true,
+    "strictPropertyInitialization": false, 
+    
+    "experimentalDecorators": true, 
+    "emitDecoratorMetadata": true,
 
     "skipLibCheck": true
   }

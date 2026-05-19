@@ -13,3 +13,16 @@ export enum Gender {
   MALE = 'MALE',
   FEMALE = 'FEMALE',
 }
+
+export enum UserStatus {
+  ACTIVE = 'ACTIVE',       // 활성
+  INACTIVE = 'INACTIVE',   // 비활성
+  SUSPENDED = 'SUSPENDED', // 정지
+  WITHDRAWN = 'WITHDRAWN', // 탈퇴
+}
+
+export enum LoginAction {
+  LOGIN = 'LOGIN',
+  LOGOUT = 'LOGOUT',
+  LOGIN_FAIL = 'LOGIN_FAIL',
+}

@@ -2,7 +2,6 @@ import { Injectable } from "@nestjs/common";
 import { Users } from "./entity/users.entity";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { UserSocialAccounts } from "./entity/user-social-accounts.entity";
 import { UserAuthHistories } from "./entity/user-auth-histories.entity";
 import { UsersInfoResponseDto } from "./dto/data/users-info-data.dto";
 import { UserType } from "../common/enum/users.enum";
@@ -13,11 +12,8 @@ export class UsersRepository {
     constructor(
         @InjectRepository(Users)
         private readonly usersRepository: Repository<Users>,
-        @InjectRepository(UserSocialAccounts)
-        private readonly usersSocialAccountRepository: Repository<UserSocialAccounts>,
         @InjectRepository(UserAuthHistories)
         private readonly userAuthHistoriesRepository: Repository<UserAuthHistories>
-        
     ) {}
 
     async saveUsers(user: Users): Promise<Users> {
@@ -25,13 +21,8 @@ export class UsersRepository {
     }
 
     async saveUserAuthHistories(userAuthHistories: UserAuthHistories): Promise<UserAuthHistories> {
-        return await this.userAuthHistoriesRepository.save(userAuthHistories)
+        return await this.userAuthHistoriesRepository.save(userAuthHistories);
     }
-
-    async saveUserSocialAccounts(userSocialAccounts: UserSocialAccounts): Promise<UserSocialAccounts> {
-        return await this.usersSocialAccountRepository.save(userSocialAccounts);
-    }
-
 
     async isIdentityAvailable(identity: string): Promise<boolean> {
         const count = await this.usersRepository.createQueryBuilder('user')
@@ -40,29 +31,13 @@ export class UsersRepository {
         return count <= 0;
     }
 
-    async isSnsAvailable(providerUserId: string): Promise<boolean> {
-        const count = await this.usersSocialAccountRepository.createQueryBuilder('social')
-                                .where('LOWER(social.providerUserId) = LOWER(:providerUserId)', { providerUserId })
-                                .getCount();
-        return count <= 0;
-    }
-
-
-
     async findByIdentity(identity: string): Promise<Users | null> {
         return await this.usersRepository.createQueryBuilder('user')
                         .where('LOWER(user.identity) = LOWER(:identity)', { identity })
-                        .getOne()
+                        .getOne();
     }
 
-    async findByProviderUserId(providerUserId: string): Promise<UserSocialAccounts | null> {
-        return  await this.usersSocialAccountRepository.createQueryBuilder('social')
-                    .leftJoinAndSelect('social.user', 'user')
-                    .where('social.providerUserId  = :providerUserId ', {providerUserId})
-                    .getOne()
-    }
-
-    async findById(id:number): Promise<UsersInfoResponseDto | undefined> {
+    async findById(id: number): Promise<UsersInfoResponseDto | undefined> {
         return await this.usersRepository.createQueryBuilder('u')
             .leftJoin('u.partnerProfile', 'd')
             .select([
@@ -86,14 +61,13 @@ export class UsersRepository {
             .getRawOne(); 
     }
 
-
-    async findByIdInfo(id:number): Promise<Users | null> {
+    async findByIdInfo(id: number): Promise<Users | null> {
         return await this.usersRepository.createQueryBuilder('u')
-                        .where('u.id = :id', {id})
+                        .where('u.id = :id', { id })
                         .getOne();
     }
 
-    async findByNamePhone(name:string, phone: string) : Promise<Users | null> {
+    async findByNamePhone(name: string, phone: string): Promise<Users | null> {
         return await this.usersRepository.createQueryBuilder('user')
                         .where('user.user_type <> :userType', { userType: UserType.ADMIN })
                         .andWhere('user.name = :name', { name })
@@ -102,8 +76,7 @@ export class UsersRepository {
                         .getOne();
     }
     
-
-    async findByIdentityPhone(identity:string, phone: string) : Promise<Users | null> {
+    async findByIdentityPhone(identity: string, phone: string): Promise<Users | null> {
         return await this.usersRepository.createQueryBuilder('user')
                         .where('user.user_type <> :userType', { userType: UserType.ADMIN })
                         .andWhere('user.identity = :identity', { identity })
@@ -112,4 +85,3 @@ export class UsersRepository {
                         .getOne();
     }
 }
-
