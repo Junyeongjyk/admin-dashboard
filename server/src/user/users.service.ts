@@ -8,7 +8,6 @@ import { PartnerRepository } from "../partner/partner.repository";
 import { saveUploadedFile } from "../common/functions/file-save.util";
 import { UsersDeleteMeDto } from "./dto/users-delete-me.dto";
 import { UsersAlamRequestDto } from "./dto/users-alam.dto";
-import { UserSocialAccounts } from "./entity/user-social-accounts.entity";
 import { SocialSignupRequestDto } from "../auth/dto/auth-social-signup.dto";
 import { SignupRequestDto } from "../auth/dto/auth-signup.dto";
 import { createKey, encrypt } from "../common/functions/aes.util";
@@ -163,18 +162,6 @@ export class UsersService {
                 }
             }
 
-            if (dto.provider != SignupPath.NORMAL) {
-
-                const socialAccount = new UserSocialAccounts();
-                socialAccount.userId = userInfo.id;
-                socialAccount.user = userInfo
-                socialAccount.provider = dto.provider
-                socialAccount.providerUserId = dto.plainProviderUserId
-                socialAccount.email = dto.plainEmail
-                socialAccount.profileImageUrl = dto.plainProfileImageUrl
-
-                await this.usersRepository.saveUserSocialAccounts(socialAccount)
-            }
 
             return handleSend()
 

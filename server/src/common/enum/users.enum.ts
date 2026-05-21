@@ -26,3 +26,9 @@ export enum LoginAction {
   LOGOUT = 'LOGOUT',
   LOGIN_FAIL = 'LOGIN_FAIL',
 }
+
+
+export enum SignupPath {
+  NORMAL = 'NORMAL',
+  ADMIN = 'ADMIN',
+}
