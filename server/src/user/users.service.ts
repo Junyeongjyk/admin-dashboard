@@ -8,7 +8,6 @@ import { PartnerRepository } from "../partner/partner.repository";
 import { saveUploadedFile } from "../common/functions/file-save.util";
 import { UsersDeleteMeDto } from "./dto/users-delete-me.dto";
 import { UsersAlamRequestDto } from "./dto/users-alam.dto";
-import { SocialSignupRequestDto } from "../auth/dto/auth-social-signup.dto";
 import { SignupRequestDto } from "../auth/dto/auth-signup.dto";
 import { createKey, encrypt } from "../common/functions/aes.util";
 import { UsersUpdateRequestDto } from "./dto/users-update.dto";
@@ -32,7 +31,7 @@ export class UsersService {
     ) {}
 
     async createUser(
-        dto: SignupRequestDto | SocialSignupRequestDto,
+        dto: SignupRequestDto,
         profileImage?: Express.Multer.File,
         businessRegistrationImage?: Express.Multer.File,
         licenseImage?: Express.Multer.File,
@@ -61,38 +60,6 @@ export class UsersService {
 
                 if (profileImage && profileImage.size > 2 * 1024 * 1024) {
                     throw new PayloadTooLargeException('프로필 사진은 최대 2MB까지 업로드 가능합니다.');
-                }
- 
-                if (!dto.businessName || !dto.businessDetailAddress || !dto.businessAddress || !dto.businessZipCode || !dto.businessCeo) {
-                    throw new BadRequestException('사업자 정보는 필수있니다.');
-                }
-
-                if (!businessRegistrationImage) {
-                    throw new BadRequestException('사업자등록증은 필수입니다.');
-                }
-
-                if (businessRegistrationImage && businessRegistrationImage.size > 10 * 1024 * 1024) {
-                    throw new PayloadTooLargeException('사업자등록증은 최대 10MB까지 업로드 가능합니다.');
-                }
-
-                if (!dto.careerYears) {
-                    throw new BadRequestException('경력연수는 필수입니다.');
-                }
-
-                if (!dto.mainActivityRegion) {
-                    throw new BadRequestException('주 활동지역은 필수입니다.');
-                }
-
-                if (!dto.introduction) {
-                    throw new BadRequestException('전문분야는 필수입니다.');
-                }
-
-                if (!licenseImage) {
-                    throw new BadRequestException('자격증 사진은 필수입니다.');
-                }
-
-                if (!dto.fee || dto.fee <= 0) {
-                    throw new BadRequestException('최소수임 금액은 필수입니다.');
                 }
 
             }
