@@ -1,14 +1,72 @@
-import { Column, CreateDateColumn, Entity, Index, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Users } from "../../user/entity/users.entity";
 
-@Entity('users')
-export class Users {
-    @PrimaryGeneratedColumn({comment: 'id'})
+@Entity({ name: 'faqs' })
+export class Faqs {
+
+    @PrimaryGeneratedColumn()
     id: number;
 
-    /* ===== 기본 정보 ===== */
-    @Column({ type: 'varchar', length: 50, comment: '아이디(이메일)' })
-    identity: string;
+    @Column({
+        type: 'varchar',
+        length: 50,
+        nullable: true,
+        comment: 'FAQ 카테고리',
+    })
+    category: string;
 
-    @Column({ type: 'varchar', length: 255, comment: '패스워드'})
-    password: string;
+    @Column({
+        type: 'text',
+        comment: '질문',
+    })
+    question: string;
+
+    @Column({
+        type: 'text',
+        comment: '답변',
+    })
+    answer: string;
+
+    @Column({
+        name: 'is_published',
+        type: 'boolean',
+        default: true,
+        comment: '게시 여부',
+    })
+    isPublished: boolean;
+
+    @Column({
+        name: 'display_order',
+        type: 'int',
+        default: 0,
+        comment: '노출 순서',
+    })
+    displayOrder: number;
+
+    @Column({
+        name: 'created_by',
+        type: 'bigint',
+        nullable: true,
+        comment: '작성 관리자 ID',
+    })
+    createdBy: number | null;
+
+    @ManyToOne(() => Users, { onDelete: 'NO ACTION', onUpdate: 'NO ACTION', nullable: true })
+    @JoinColumn({ name: 'created_by' })
+    admin: Users | null;
+
+    @CreateDateColumn({
+        name: 'created_at',
+        type: 'timestamptz',
+        default: () => 'CURRENT_TIMESTAMP',
+    })
+    createdAt: Date;
+
+    @UpdateDateColumn({
+        name: 'updated_at',
+        type: 'timestamptz',
+        default: () => 'CURRENT_TIMESTAMP',
+    })
+    updatedAt: Date;
+    
 }
