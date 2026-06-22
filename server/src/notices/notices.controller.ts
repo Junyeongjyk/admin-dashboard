@@ -29,7 +29,7 @@ export class NoticesController {
         requestBodyDtos: [NoticesListRequestDto],
     })
     @UseGuards(TokenAuthGuard)
-    async noticesList(@Body() dto: NoticesListRequestDto, @Token([UserType.USER, UserType.DETECTIVE]) token:any) {
+    async noticesList(@Body() dto: NoticesListRequestDto, @Token([UserType.USER, UserType.PARTNER]) token:any) {
         return await this.noticesService.getList(dto, token);
     }
 
