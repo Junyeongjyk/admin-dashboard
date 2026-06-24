@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsOptional, IsString } from "class-validator";
-import { NoticesCategory } from "../../common/enum/notices.enum";
+import { IsOptional, IsString , IsNumber} from "class-validator";
+import { NoticesCategory } from "../../../common/enum/notices.enum";
 
 export class NoticesListRequestDto {
 
@@ -18,17 +18,17 @@ export class NoticesListRequestDto {
         example: '1',
         required: true
     })
-    @IsString()
+    @IsNumber()
     @IsOptional()
-    page: string;
+    page: number;
 
     @ApiProperty({
         description: '리스트 수',
         example: '20',
         required: true
     })
-    @IsString()
+    @IsNumber()
     @IsOptional()
-    size: string;
+    size: number;
 
 }
