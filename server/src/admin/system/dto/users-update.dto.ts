@@ -2,7 +2,7 @@ import { ApiHideProperty, ApiProperty } from "@nestjs/swagger";
 import { Allow, IsBoolean, IsNotEmpty, IsString, Matches } from "class-validator";
 import { Gender } from "../../common/enum/users.enum";
 
-export class UsersUpdateRequestDto {
+export class UserUpdateRequestDto {
 
     @ApiProperty({
         description: '이메일 - 암호화 필요', 

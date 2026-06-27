@@ -1,26 +1,26 @@
 
 import { Body, Controller, Delete, HttpCode, HttpStatus, Patch, Post, Res, UseGuards } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
-import { UsersService } from "./system.service";
+import { UserService } from "./system.service";
 import { ApiStdResponses } from "../config/swagger/api-response.decorator";
-import { UsersDeleteMeDto } from "./dto/users-delete-me.dto";
+import { UserDeleteMeDto } from "./dto/users-delete-me.dto";
 import { TokenAuthGuard } from "../common/gaurds/token-auth.gaurds";
 import { Token } from "../common/token.decorator";
 import { UserType } from "../common/enum/users.enum";
-import { UsersInfoResponseDto } from "./dto/data/users-info-data.dto";
-import { UsersUpdateRequestDto } from "./dto/users-update.dto";
+import { UserInfoResponseDto } from "./dto/data/users-info-data.dto";
+import { UserUpdateRequestDto } from "./dto/users-update.dto";
 import { DecryptAndValidateUpdatePipe } from "./pipes/auth.update.pipe";
-import { UsersUpdatePasswordRequestDto } from "./dto/users-update-password.dto";
+import { UserUpdatePasswordRequestDto } from "./dto/users-update-password.dto";
 import { DecryptAndValidateUpdatePasswordPipe } from "./pipes/auth.update-password.pipe";
 import { Response } from 'express';
 
 @ApiTags('유저')
 @Controller('/users')
 @UseGuards(TokenAuthGuard)
-export class UsersController {
+export class UserController {
 
     constructor(
-        private readonly usersService: UsersService,
+        private readonly usersService: UserService,
     ) {}
 
     @Post('/me')
@@ -30,7 +30,7 @@ export class UsersController {
         description: '프로필 정보 조회',
         okExampleCode: 'SUCCESS',
         okExampleMessage: '요청 성공',
-        okDataDto: UsersInfoResponseDto,
+        okDataDto: UserInfoResponseDto,
         //okDataDto: FilesDownloadResponseDto,
     })
     
@@ -48,13 +48,13 @@ export class UsersController {
         okExampleCode: 'SUCCESS',
         okExampleMessage: '요청 성공',
         //okDataDto: FilesDownloadResponseDto,
-        requestBodyDtos: [UsersUpdateRequestDto],
+        requestBodyDtos: [UserUpdateRequestDto],
     })
     async updateMyProfile(
-        @Body(DecryptAndValidateUpdatePipe) dto: UsersUpdateRequestDto,
+        @Body(DecryptAndValidateUpdatePipe) dto: UserUpdateRequestDto,
         @Token([UserType.USER, UserType.PARTNER]) token:any
     ) {
-        return await this.usersService.updateUsers(dto, token);
+        return await this.usersService.updateUser(dto, token);
     }
 
     @Patch('/me/password')
@@ -65,10 +65,10 @@ export class UsersController {
         okExampleCode: 'SUCCESS',
         okExampleMessage: '요청 성공',
         //okDataDto: FilesDownloadResponseDto,
-        requestBodyDtos: [UsersUpdatePasswordRequestDto],
+        requestBodyDtos: [UserUpdatePasswordRequestDto],
     })
     async updateMyPassword(
-        @Body(DecryptAndValidateUpdatePasswordPipe) dto: UsersUpdatePasswordRequestDto,
+        @Body(DecryptAndValidateUpdatePasswordPipe) dto: UserUpdatePasswordRequestDto,
         @Token([UserType.USER, UserType.PARTNER]) token:any
     ) {
         return await this.usersService.updatePassword(dto, token);
@@ -81,10 +81,10 @@ export class UsersController {
         description: '회원 탈퇴(소프트 삭제/비활성)',
         okExampleCode: 'SUCCESS',
         okExampleMessage: '요청 성공',
-        requestBodyDtos: [UsersDeleteMeDto],
+        requestBodyDtos: [UserDeleteMeDto],
     })
     async deleteMe(
-        @Body() dto: UsersDeleteMeDto,
+        @Body() dto: UserDeleteMeDto,
         @Token([UserType.USER, UserType.PARTNER]) token:any,
         @Res({ passthrough: true }) res: Response,
     ) {

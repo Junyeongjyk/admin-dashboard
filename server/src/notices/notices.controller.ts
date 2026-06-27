@@ -3,8 +3,8 @@ import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, UseGuards } f
 import { ApiTags } from "@nestjs/swagger";
 import { ApiStdResponses } from "../config/swagger/api-response.decorator";
 import { NoticesService } from "./notices.service";
-import { NoticesClientListResponseDto } from "./dto/data/notices-list-data.dto";
-import { NoticesClientDetailResponseDto } from "./dto/data/notices-detail-data.dto";
+import { NoticesUserListResponseDto } from "./dto/data/notices-list-data.dto";
+import { NoticesUserDetailResponseDto } from "./dto/data/notices-detail-data.dto";
 import { NoticesListRequestDto } from "./dto/notices-list.dto";
 import { TokenAuthGuard } from "../common/gaurds/token-auth.gaurds";
 import { Token } from "../common/token.decorator";
@@ -25,7 +25,7 @@ export class NoticesController {
         description: '회원 유형별 공지사항 목록',
         okExampleCode: 'SUCCESS',
         okExampleMessage: '요청 성공',
-        okDataDto: NoticesClientListResponseDto,
+        okDataDto: NoticesUserListResponseDto,
         requestBodyDtos: [NoticesListRequestDto],
     })
     @UseGuards(TokenAuthGuard)
@@ -40,7 +40,7 @@ export class NoticesController {
         description: '공지사항 상세정보 조회',
         okExampleCode: 'SUCCESS',
         okExampleMessage: '요청 성공',
-        okDataDto: NoticesClientDetailResponseDto,
+        okDataDto: NoticesUserDetailResponseDto,
         pathParams:[
             {name: 'noticeId', description: '공지사항 PK', example: 1 }
         ]

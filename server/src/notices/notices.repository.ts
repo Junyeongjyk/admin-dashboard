@@ -3,7 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Notices } from "./entity/notices.entity";
 import { Repository } from "typeorm";
 import { NoticesItem } from "./dto/data/notices-list-data.dto";
-import { NoticesClientDetailResponseDto } from "./dto/data/notices-detail-data.dto";
+import { NoticesUserDetailResponseDto } from "./dto/data/notices-detail-data.dto";
 
 @Injectable()
 export class NoticesRepository {
@@ -45,7 +45,7 @@ export class NoticesRepository {
             .getRawMany()
     }
 
-    async findById(id:number): Promise<NoticesClientDetailResponseDto | null | undefined> {
+    async findById(id:number): Promise<NoticesUserDetailResponseDto | null | undefined> {
 
         await this.noticesRepository.increment({ id }, 'viewCount', 1);
         return await this.noticesRepository.createQueryBuilder('notices')

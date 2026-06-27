@@ -2,7 +2,7 @@ import { ApiPropertyOptional } from "@nestjs/swagger";
 import { IsEnum, IsNumber, IsOptional, IsString } from "class-validator";
 import { UserStatus } from "../../../common/enum/users.enum";
 
-export class UsersListRequestDto {
+export class UserListRequestDto {
     @ApiPropertyOptional({
         description: '페이지',
         example: 1,

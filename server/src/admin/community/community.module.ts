@@ -3,7 +3,7 @@ import { Module } from "@nestjs/common";
 import { CommunityController } from "./community.controller";
 import { CommunityService } from "./community.service";
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Users } from "../../user/entity/users.entity";
+import { User } from "../../user/entity/users.entity";
 import { CommunityPost } from "../../community/entity/community-posts.entity";
 import { CommunityComment } from "../../community/entity/community-comments.entity";
 import { CommunityRepository } from "./community.repository";
@@ -12,7 +12,7 @@ import { JwtModule } from "@nestjs/jwt";
 @Module({
     imports: [
         TypeOrmModule.forFeature([ 
-            Users,
+            User,
             CommunityComment,
             CommunityPost
         ]), 

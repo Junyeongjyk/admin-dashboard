@@ -2,7 +2,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { IsEnum, IsNotEmpty, IsNumber, IsString } from "class-validator";
 import { CommunityPostType } from "../../common/enum/community.eum";
 
-export class CommunityClientUpdateRequestDto {
+export class CommunityUserUpdateRequestDto {
 
     @ApiProperty({
         description: '게시물 ID',

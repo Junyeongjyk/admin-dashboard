@@ -2,7 +2,7 @@ import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 import { CommunityPostType } from "../../common/enum/community.eum";
 import { IsArray, IsBoolean, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
 
-export class CommunityClientCreateRequestDto {
+export class CommunityUserCreateRequestDto {
 
     @ApiProperty({
         description: '게시물 내용 유형(카테고리)',

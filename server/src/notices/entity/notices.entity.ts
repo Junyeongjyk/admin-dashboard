@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { Users } from "../../user/entity/users.entity";
+import { User } from "../../user/entity/users.entity";
 import { NoticePriority } from "../../common/enum/notices.enum";
 
 @Entity({ name: 'notices' })

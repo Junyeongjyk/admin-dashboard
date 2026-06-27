@@ -1,7 +1,7 @@
 import { ApiPropertyOptional } from "@nestjs/swagger";
 import { Gender } from "../../../common/enum/users.enum";
 
-export class UsersInfoResponseDto {
+export class UserInfoResponseDto {
 
     @ApiPropertyOptional({
         description: '유저(파트너) ID',

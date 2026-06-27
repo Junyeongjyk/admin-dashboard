@@ -19,7 +19,7 @@ const formatYYMMDDHHmm = (d: Date): string => {
 
 export const createKey = () => {
     const time = getCurrentTime()
-    const initKey = time + 'detective'
+    const initKey = time + 'partner'
     const rst = getHex512(initKey)
     return rst.slice(0, 32)
 }
@@ -84,7 +84,7 @@ export const getDecryptData = (encData: string, label: string) => {
         else dateTime = addMinutes(now, -1);
 
         const time = formatYYMMDDHHmm(dateTime)
-        const initKey = time + 'detective'
+        const initKey = time + 'partner'
 
         try {
             

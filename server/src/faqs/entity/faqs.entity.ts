@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { Users } from "../../user/entity/users.entity";
+import { User } from "../../user/entity/users.entity";
 
 @Entity({ name: 'faqs' })
 export class Faqs {
@@ -51,9 +51,9 @@ export class Faqs {
     })
     createdBy: number | null;
 
-    @ManyToOne(() => Users, { onDelete: 'NO ACTION', onUpdate: 'NO ACTION', nullable: true })
+    @ManyToOne(() => User, { onDelete: 'NO ACTION', onUpdate: 'NO ACTION', nullable: true })
     @JoinColumn({ name: 'created_by' })
-    admin: Users | null;
+    admin: User | null;
 
     @CreateDateColumn({
         name: 'created_at',

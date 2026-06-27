@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Users } from "./users.entity";
+import { User } from "./users.entity";
 import { LoginAction } from "../../common/enum/users.enum";
 
 @Entity({ name: 'user_auth_histories' })
@@ -11,9 +11,9 @@ export class UserAuthHistories {
     @Column({ name: 'user_id', type: 'bigint', nullable: true })
     userId: number | null;
 
-    @ManyToOne(() => Users, { onDelete: 'CASCADE' })
+    @ManyToOne(() => User, { onDelete: 'CASCADE' })
     @JoinColumn({ name: 'user_id' })
-    user: Users;
+    user: User;
 
     @Column({
         type: 'enum',

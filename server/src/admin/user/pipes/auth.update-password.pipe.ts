@@ -1,13 +1,13 @@
 import { Injectable, PipeTransform } from "@nestjs/common";
 import { getDecryptData } from "../../common/functions/aes.util";
 import { validateIdentity, validatePassword } from "../../common/functions/validate";
-import { UsersUpdatePasswordRequestDto } from "../dto/users-update-password.dto";
+import { UserUpdatePasswordRequestDto } from "../dto/users-update-password.dto";
 
 
 @Injectable()
 export class DecryptAndValidateUpdatePasswordPipe implements PipeTransform {
 
-    transform(dto: UsersUpdatePasswordRequestDto): UsersUpdatePasswordRequestDto {
+    transform(dto: UserUpdatePasswordRequestDto): UserUpdatePasswordRequestDto {
 
         const plainIdentity = getDecryptData(dto.identity, '이메일');
         const plainPassword = getDecryptData(dto.password, '비밀번호');

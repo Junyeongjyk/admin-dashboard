@@ -1,26 +1,26 @@
 import { Injectable } from "@nestjs/common";
-import { Users } from "../../user/entity/users.entity";
+import { User } from "../../user/entity/users.entity";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { UsersListRequestDto } from "../user/dto/users-list.dto";
+import { UserListRequestDto } from "../user/dto/users-list.dto";
 import { PartnerProfiles } from "../../partner/entity/partner-profiles.entity";
 
 @Injectable()
-export class PartnersRepository {
+export class PartnerRepository {
     constructor(
-        @InjectRepository(Users)
-        private readonly usersRepository: Repository<Users>,
+        @InjectRepository(User)
+        private readonly usersRepository: Repository<User>,
         @InjectRepository(PartnerProfiles)
         private readonly partnerProfiles: Repository<PartnerProfiles>,
     ) {}
 
-    async getList(dto: UsersListRequestDto): Promise<any> {
+    async getList(dto: UserListRequestDto): Promise<any> {
         const { page = 0, size = 20, q, orderColumn, orderSort } = dto;
 
         const queryBuilder = this.usersRepository.createQueryBuilder('u')
             .leftJoinAndSelect('u.partnerProfile', 'partnerProfile')
             .leftJoinAndSelect('partnerProfile.certifications', 'certifications')
-            .where('u.userType = :userType', { userType: 'DETECTIVE' })
+            .where('u.userType = :userType', { userType: 'PARTNER' })
             .skip(page)
             .take(size);
 

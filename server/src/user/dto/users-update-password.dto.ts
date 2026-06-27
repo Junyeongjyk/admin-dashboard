@@ -1,7 +1,7 @@
 import { ApiHideProperty, ApiProperty } from "@nestjs/swagger";
 import { Allow, IsBoolean, IsNotEmpty, IsString, Matches } from "class-validator";
 
-export class UsersUpdatePasswordRequestDto {
+export class UserUpdatePasswordRequestDto {
 
     @ApiProperty({
         description: '아이디 - 암호화 필요', 

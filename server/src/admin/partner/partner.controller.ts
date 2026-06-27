@@ -2,7 +2,7 @@
 import { Body, Controller, HttpCode, HttpStatus, Post, Res } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { ApiStdResponses } from "../../config/swagger/api-response.decorator";
-import { PartnersService } from "./partner.service";
+import { PartnerService } from "./partner.service";
 import { PartnerApprovalRequestDto } from "./dto/partner-approval.dto";
 import { PartnerLocationRequestDto } from "./dto/partner-location.dto";
 import { PartnerLocationResponsetDto } from "./dto/data/partner-location.dto";
@@ -15,10 +15,10 @@ import * as fs from 'fs';
 
 @ApiTags('관리자 - 파트너 관리')
 @Controller('/admin/partner')
-export class PartnersController {
+export class PartnerController {
 
     constructor(
-        private readonly partnerService: PartnersService
+        private readonly partnerService: PartnerService
     ) {}
     @Post('/')
     @HttpCode(HttpStatus.OK)

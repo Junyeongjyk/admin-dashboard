@@ -1,7 +1,7 @@
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 import { IsOptional, IsString } from "class-validator";
 
-export class UsersDeleteMeDto {
+export class UserDeleteMeDto {
 
     @ApiProperty({
         description: '접속 디바이스Id',

@@ -3,7 +3,7 @@ import { IsOptional } from "class-validator";
 import { NoticesItem } from "./notices-list-data.dto";
 
 
-export class NoticesClientDetailResponseDto extends NoticesItem{
+export class NoticesUserDetailResponseDto extends NoticesItem{
 
     @ApiProperty({
         description: '공지사항 내용', 

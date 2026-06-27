@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { Users } from "../../user/entity/users.entity";
+import { User } from "../../user/entity/users.entity";
 import { CommunityPost } from "./community-posts.entity";
 
 @Entity({ name: 'community_comments' })
@@ -63,9 +63,9 @@ export class CommunityComment {
     * =============================== */
 
     // 작성자
-    @ManyToOne(() => Users, { onDelete: 'NO ACTION', onUpdate: 'NO ACTION' })
+    @ManyToOne(() => User, { onDelete: 'NO ACTION', onUpdate: 'NO ACTION' })
     @JoinColumn({ name: 'author_id', referencedColumnName: 'id' })
-    author: Users;
+    author: User;
 
     // 게시글
     @ManyToOne(() => CommunityPost, (post) => post.comments, {

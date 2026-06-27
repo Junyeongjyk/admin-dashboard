@@ -65,7 +65,7 @@ export const createKey = async () => {
         const serverTime:string = response.data;
         const time = formatToYYMMDDHHmm(serverTime)
 
-        const initKey = time + 'detective'
+        const initKey = time + 'partner'
         const rst = await getHashCode(initKey)
 
         return rst.slice(0, 32)
@@ -126,7 +126,7 @@ export const getDecryptData = async (encText:string) => {
 
         const formattedTime = getNowFormatTime('yy:MM:dd:HH:mm', date);
 
-        let initKey = formattedTime + 'detective'
+        let initKey = formattedTime + 'partner'
         const hash = await getHashCode(initKey); // SHA-512
         const key = hash.slice(0, 32); // AES256용 키 (첫 32자)
 

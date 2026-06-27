@@ -49,7 +49,7 @@ export class NoticesItem {
     createdAt: string;
 }
 
-export class NoticesClientListResponseDto {
+export class NoticesUserListResponseDto {
     @ApiProperty({
         description: '공지사항 리스트', 
         required:true, 

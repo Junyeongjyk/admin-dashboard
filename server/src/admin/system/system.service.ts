@@ -1,17 +1,17 @@
 import { BadRequestException, ConflictException, HttpException, Injectable, InternalServerErrorException, NotFoundException, PayloadTooLargeException } from "@nestjs/common";
 import { handleSend, log } from "../config/log.tools.config";
-import { UsersRepository } from "./users.repository";
-import { Users } from "./entity/users.entity";
+import { UserRepository } from "./users.repository";
+import { User } from "./entity/users.entity";
 import { getHex512 } from "../common/functions/common";
 import { Gender, SignupPath, UserType } from "../common/enum/users.enum";
 import { PartnerRepository } from "../partner/partner.repository";
 import { saveUploadedFile } from "../common/functions/file-save.util";
-import { UsersDeleteMeDto } from "./dto/users-delete-me.dto";
-import { UsersAlamRequestDto } from "./dto/users-alam.dto";
+import { UserDeleteMeDto } from "./dto/users-delete-me.dto";
+import { UserAlamRequestDto } from "./dto/users-alam.dto";
 import { SignupRequestDto } from "../auth/dto/auth-signup.dto";
 import { createKey, encrypt } from "../common/functions/aes.util";
-import { UsersUpdateRequestDto } from "./dto/users-update.dto";
-import { UsersUpdatePasswordRequestDto } from "./dto/users-update-password.dto";
+import { UserUpdateRequestDto } from "./dto/users-update.dto";
+import { UserUpdatePasswordRequestDto } from "./dto/users-update-password.dto";
 import { FilePath } from "../common/enum/common.enum";
 import { PartnerCertification } from "../partner/entity/partner-certifications.entity";
 import { PartnerCertificationStatus } from "../common/enum/partner.enum";
@@ -21,10 +21,10 @@ import { Sign } from "../common/sign.helper";
 import { Response } from 'express';
 
 @Injectable()
-export class UsersService {
+export class UserService {
 
     constructor(
-        private readonly usersRepository: UsersRepository,
+        private readonly usersRepository: UserRepository,
         private readonly partnerRepository: PartnerRepository,
         private readonly realtimeCredentialService: RealtimeCredentialService,
         private sign: Sign,
@@ -64,7 +64,7 @@ export class UsersService {
 
             }
 
-            const user = new Users();
+            const user = new User();
             if(dto.provider == SignupPath.NORMAL) {
                 user.identity = dto.plainIdentity
                 user.password = getHex512(dto.plainPassword)
@@ -87,7 +87,7 @@ export class UsersService {
             user.marketingAgreed = dto.marketingAgreed ? dto.marketingAgreed : false 
 
             user.isActive = dto.userType !== UserType.PARTNER ? true : false
-            const userInfo = await this.usersRepository.saveUsers(user)
+            const userInfo = await this.usersRepository.saveUser(user)
             if (dto.userType === UserType.PARTNER) {
 
                 const profile = new PartnerProfiles();
@@ -133,7 +133,7 @@ export class UsersService {
             return handleSend()
 
         } catch (error) {
-            log('[UsersService] createUser', '회원가입 예러', error)
+            log('[UserService] createUser', '회원가입 예러', error)
             // 이미 의도한 HTTP 예외는 그대로 전달
             if (error instanceof HttpException) {
                 throw error;
@@ -163,7 +163,7 @@ export class UsersService {
 
 
         } catch (error) {
-            log('[UsersService] getUserInfo', '회원정보 조회 예러', error)
+            log('[UserService] getUserInfo', '회원정보 조회 예러', error)
             // 이미 의도한 HTTP 예외는 그대로 전달
             if (error instanceof HttpException) {
                 throw error;
@@ -174,7 +174,7 @@ export class UsersService {
     }
 
 
-    async updateUsers(dto: UsersUpdateRequestDto, token:any) {
+    async updateUser(dto: UserUpdateRequestDto, token:any) {
         try {
           
             const userInfo = await this.usersRepository.findByIdInfo(token.id)
@@ -193,11 +193,11 @@ export class UsersService {
 
             userInfo.gender = dto.gender as Gender
 
-            await this.usersRepository.saveUsers(userInfo)
+            await this.usersRepository.saveUser(userInfo)
             return handleSend()
             
         } catch (error) {
-            log('[UsersService] updateAddress',  '주소 변경 중 오류가 발생했습니다.', error)
+            log('[UserService] updateAddress',  '주소 변경 중 오류가 발생했습니다.', error)
     
             if (error instanceof HttpException) {
                 throw error;
@@ -207,7 +207,7 @@ export class UsersService {
         }
     }
 
-    async updatePassword(dto: UsersUpdatePasswordRequestDto, token:any) {
+    async updatePassword(dto: UserUpdatePasswordRequestDto, token:any) {
         try {
           
             const userInfo = await this.usersRepository.findByIdInfo(token.id)
@@ -220,12 +220,12 @@ export class UsersService {
             }
 
             userInfo.password = getHex512(dto.plainPassword)
-            await this.usersRepository.saveUsers(userInfo)
+            await this.usersRepository.saveUser(userInfo)
             
             return handleSend()
             
         } catch (error) {
-            log('[UsersService] updateAddress',  '주소 변경 중 오류가 발생했습니다.', error)
+            log('[UserService] updateAddress',  '주소 변경 중 오류가 발생했습니다.', error)
     
             if (error instanceof HttpException) {
                 throw error;
@@ -237,7 +237,7 @@ export class UsersService {
 
 
 
-    async deleteMe(dto: UsersDeleteMeDto, token:any, res: Response) {
+    async deleteMe(dto: UserDeleteMeDto, token:any, res: Response) {
         try {
             
             const userInfo = await this.usersRepository.findByIdInfo(token.id)
@@ -258,12 +258,12 @@ export class UsersService {
             userInfo.isDeleted = true
             userInfo.deletedAt = new Date()
             
-            await this.usersRepository.saveUsers(userInfo)
+            await this.usersRepository.saveUser(userInfo)
            
             return handleSend()
             
         } catch (error) {
-            log('[UsersService] deleteMe',  '계정 해지 중 오류가 발생했습니다.', error)
+            log('[UserService] deleteMe',  '계정 해지 중 오류가 발생했습니다.', error)
     
             if (error instanceof HttpException) {
                 throw error;
@@ -273,7 +273,7 @@ export class UsersService {
         }
     }
 
-    // async settingAlam(dto: UsersAlamRequestDto) {
+    // async settingAlam(dto: UserAlamRequestDto) {
     //      try {
     //         /**
     //          * TODO 유저별 알람 설정 
@@ -284,7 +284,7 @@ export class UsersService {
     //         return handleSend()
             
     //     } catch (error) {
-    //         log('[UsersService] deleteMe',  '알람 설정 중 오류가 발생했습니다.', error)
+    //         log('[UserService] deleteMe',  '알람 설정 중 오류가 발생했습니다.', error)
     
     //         if (error instanceof HttpException) {
     //             throw error;

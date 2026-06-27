@@ -6,13 +6,12 @@ import { NoticesRepository } from "./notices.repository";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { Notices } from "./entity/notices.entity";
 import { JwtModule } from "@nestjs/jwt";
-import { Users } from "../user/entity/users.entity";
-import { DetectiveProfiles } from "../detective/entity/detective-profiles.entity";
+import { User } from "../user/entity/users.entity";
 
 @Module({
     imports: [
         TypeOrmModule.forFeature([
-            Notices, Users, DetectiveProfiles
+            Notices, User
         ]),
         JwtModule.register({
             secret: process.env.JWT_SECRET_KEY,

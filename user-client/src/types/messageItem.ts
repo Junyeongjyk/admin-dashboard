@@ -12,7 +12,7 @@ export interface RoomItem {
     createdAt: string,
     profileImage?: string;
     // updatedAt: string,
-    // detectiveId: number | null,
+    // partnerId: number | null,
     // weeks: number | null,
     // amount: number | null,
     // biddings: biddingItem[] | null

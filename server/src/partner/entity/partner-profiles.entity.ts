@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { Users } from "../../user/entity/users.entity";
+import { User } from "../../user/entity/users.entity";
 
 @Entity({ name: 'partner_profiles' })
 export class PartnerProfiles {
@@ -13,9 +13,9 @@ export class PartnerProfiles {
     @Column({ type: 'bigint', name: 'user_id' })
     userId: number;
 
-    @OneToOne(() => Users, { onDelete: 'CASCADE' })
+    @OneToOne(() => User, { onDelete: 'CASCADE' })
     @JoinColumn({ name: 'user_id' })
-    user: Users;
+    user: User;
 
     @Column({ type: 'varchar', length: 50 })
     nickname: string;

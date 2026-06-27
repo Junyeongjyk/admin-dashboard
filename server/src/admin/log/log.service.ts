@@ -38,7 +38,7 @@ export class LogService {
     //         return handleSend()
 
     //     } catch (error) {
-    //         log('[LogService] getDetectiveLogs',  '관리자 - 시스템로그 조회 오류가 발생했습니다.', error)
+    //         log('[LogService] getPartnerLogs',  '관리자 - 시스템로그 조회 오류가 발생했습니다.', error)
     
     //         if (error instanceof HttpException) {
     //             throw error;

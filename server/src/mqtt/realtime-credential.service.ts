@@ -101,7 +101,7 @@ export class RealtimeCredentialService {
     try {
       //dynsec 반영(없으면 생성, 있으면 비번 맞추기)
       await this.dynsec.ensureRealtimeSubRole();
-      await this.dynsec.ensureClient(username, password, 'realtime_sub');
+      await this.dynsec.ensureUser(username, password, 'realtime_sub');
 
       // 레이스 완화(환경에 따라 100~500ms)
       await new Promise((r) => setTimeout(r, 300));
@@ -132,9 +132,9 @@ export class RealtimeCredentialService {
 
       // 실패 시 쓰레기 계정 정리(가능한 경우)
       try {
-        await this.dynsec.deleteClient(username);
+        await this.dynsec.deleteUser(username);
       } catch (e2) {
-        this.logger.warn(`cleanup deleteClient failed: ${String(e2)}`);
+        this.logger.warn(`cleanup deleteUser failed: ${String(e2)}`);
       }
 
       throw new UnauthorizedException('MQTT credential provisioning failed');
@@ -151,9 +151,9 @@ export class RealtimeCredentialService {
     );
 
     try {
-      await this.dynsec.deleteClient(rec.mqttUsername);
+      await this.dynsec.deleteUser(rec.mqttUsername);
     } catch (e) {
-      this.logger.warn(`dynsec deleteClient failed: ${String(e)}`);
+      this.logger.warn(`dynsec deleteUser failed: ${String(e)}`);
     }
 
     this.store.delete(args.userId, args.deviceId);

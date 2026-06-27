@@ -1,7 +1,7 @@
 import { ApiPropertyOptional } from "@nestjs/swagger";
 import { IsBoolean, IsOptional } from "class-validator";
 
-export class UsersAlamRequestDto {
+export class UserAlamRequestDto {
 
     @ApiPropertyOptional({
         description: '이메일 알림 수신 여부',

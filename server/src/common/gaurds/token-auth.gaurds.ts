@@ -1,7 +1,7 @@
 import { CanActivate, ExecutionContext, ForbiddenException, Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Users } from "../../user/entity/users.entity";
+import { User } from "../../user/entity/users.entity";
 import { Repository } from "typeorm";
 import { UserType } from "../enum/users.enum";
 import { PartnerProfiles } from "../../partner/entity/partner-profiles.entity";
@@ -11,8 +11,8 @@ export class TokenAuthGuard implements CanActivate {
 
     constructor(
         private jwtService: JwtService,
-        @InjectRepository(Users)
-        private readonly usersRepository: Repository<Users>,
+        @InjectRepository(User)
+        private readonly usersRepository: Repository<User>,
         @InjectRepository(PartnerProfiles)
         private readonly partnerProfilesRepository: Repository<PartnerProfiles>,
     ) {}
@@ -72,8 +72,8 @@ export class TokenAdminAuthGuard implements CanActivate {
 
   constructor(
     private readonly jwtService: JwtService,
-    @InjectRepository(Users)
-    private readonly usersRepository: Repository<Users>,
+    @InjectRepository(User)
+    private readonly usersRepository: Repository<User>,
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {

@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { Users } from "../../../user/entity/users.entity";
+import { User } from "../../../user/entity/users.entity";
 import { CommunityComment } from "./community-comments.entity";
 
 @Entity({ name: 'community_posts' })
@@ -56,9 +56,9 @@ export class CommunityPost {
     @Column({ name: 'category', type: 'varchar', length: 50, nullable: true })
     category: string | null;
 
-    @ManyToOne(() => Users, { onDelete: 'NO ACTION', onUpdate: 'NO ACTION' })
+    @ManyToOne(() => User, { onDelete: 'NO ACTION', onUpdate: 'NO ACTION' })
     @JoinColumn({ name: 'author_id', referencedColumnName: 'id' })
-    author: Users;
+    author: User;
 
     @OneToMany(() => CommunityComment, (comment) => comment.post)
     comments: CommunityComment[];

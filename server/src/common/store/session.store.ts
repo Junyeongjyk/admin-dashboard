@@ -2,13 +2,13 @@ import { Injectable } from "@nestjs/common";
 
 @Injectable()
 export class SessionStore {
-    private readonly activeClient = new Map<string, string>();
+    private readonly activeUser = new Map<string, string>();
 
-    getActiveClientId(userId: string) {
-        return this.activeClient.get(userId);
+    getActiveUserId(userId: string) {
+        return this.activeUser.get(userId);
     }
 
-    setActiveClientId(userId: string, clientId: string) {
-        this.activeClient.set(userId, clientId);
+    setActiveUserId(userId: string, clientId: string) {
+        this.activeUser.set(userId, clientId);
     }
 }
