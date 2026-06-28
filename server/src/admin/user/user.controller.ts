@@ -1,7 +1,7 @@
 
 import { Body, Controller, Delete, HttpCode, HttpStatus, Patch, Post, Res, UseGuards } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
-import { UserService } from "./users.service";
+import { UserService } from "./user.service";
 import { ApiStdResponses } from "../config/swagger/api-response.decorator";
 import { UserDeleteMeDto } from "./dto/users-delete-me.dto";
 import { TokenAuthGuard } from "../common/gaurds/token-auth.gaurds";

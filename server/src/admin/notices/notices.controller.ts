@@ -65,7 +65,7 @@ export class NoticesController {
     @HttpCode(HttpStatus.OK)
     @ApiStdResponses({
         summary: '공지사항 등록',
-        description: '공지사항 등록(대상: 탐정/의뢰인/전체, 필수 공지 여부 포함)',
+        description: '공지사항 등록(대상: 파트너/의뢰인/전체, 필수 공지 여부 포함)',
         okExampleCode: 'SUCCESS',
         okExampleMessage: '요청 성공',
         requestBodyDtos: [NoticesCreateRequestDto],

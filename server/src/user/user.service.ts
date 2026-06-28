@@ -1,7 +1,7 @@
 import { BadRequestException, ConflictException, HttpException, Injectable, InternalServerErrorException, NotFoundException, PayloadTooLargeException } from "@nestjs/common";
 import { handleSend, log } from "../config/log.tools.config";
-import { UserRepository } from "./users.repository";
-import { User } from "./entity/users.entity";
+import { UserRepository } from "./user.repository";
+import { User } from "./entity/user.entity";
 import { getHex512 } from "../common/functions/common";
 import { Gender, SignupPath, UserType } from "../common/enum/users.enum";
 import { PartnerRepository } from "../partner/partner.repository";

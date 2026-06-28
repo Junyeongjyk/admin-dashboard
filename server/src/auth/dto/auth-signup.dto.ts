@@ -125,9 +125,9 @@ export class SignupRequestDto {
 
 
 
-    // 탐정 프로필 정보
+    // 파트너 프로필 정보
     @ApiPropertyOptional({
-        description: '탐정회원 프로필 사진 - 탐정가입시 필수',
+        description: '파트너회원 프로필 사진 - 파트너가입시 필수',
         type: 'string',
         format: 'binary',
     })
@@ -135,7 +135,7 @@ export class SignupRequestDto {
     profileImage: any;
 
     @ApiPropertyOptional({
-        description: '탐정회원 자격증 사진 - 탐정가입시 필수',
+        description: '파트너회원 자격증 사진 - 파트너가입시 필수',
         type: 'string',
         format: 'binary',
     })
@@ -144,7 +144,7 @@ export class SignupRequestDto {
 
 
     @ApiPropertyOptional({
-        description: '상호명 (개인/법인 사업자) - 탐정가입시 필수',
+        description: '상호명 (개인/법인 사업자) - 파트너가입시 필수',
         example: '홍길동상사',
     })
     @IsOptional()
@@ -152,7 +152,7 @@ export class SignupRequestDto {
     businessName?: string;
 
     @ApiPropertyOptional({
-        description: '사업자등록번호 (숫자 10자리 또는 하이픈 포함) - 탐정가입시 필수',
+        description: '사업자등록번호 (숫자 10자리 또는 하이픈 포함) - 파트너가입시 필수',
         example: '123-45-67890',
     })
     @IsOptional()
@@ -163,7 +163,7 @@ export class SignupRequestDto {
     businessRegistrationNumber?: string;
 
     @ApiPropertyOptional({
-        description: '사업자등록증 이미지 (jpg, png, pdf) - 탐정가입시 필수',
+        description: '사업자등록증 이미지 (jpg, png, pdf) - 파트너가입시 필수',
         type: 'string',
         format: 'binary',
     })
@@ -171,7 +171,7 @@ export class SignupRequestDto {
     businessRegistrationImage?: any;
 
     @ApiPropertyOptional({
-        description: '사업자 주소 (도로명 또는 지번) - 탐정가입시 필수',
+        description: '사업자 주소 (도로명 또는 지번) - 파트너가입시 필수',
         example: '서울특별시 강남구 테헤란로 123',
     })
     @IsOptional()
@@ -179,7 +179,7 @@ export class SignupRequestDto {
     businessAddress?: string;
 
     @ApiPropertyOptional({
-        description: '사업자 상세주소 (동·호수 등) - 탐정가입시 필수',
+        description: '사업자 상세주소 (동·호수 등) - 파트너가입시 필수',
         example: '101동 1001호',
     })
     @IsOptional()
@@ -187,7 +187,7 @@ export class SignupRequestDto {
     businessDetailAddress?: string;
 
     @ApiPropertyOptional({
-        description: '사업자 대표자명  - 탐정가입시 필수',
+        description: '사업자 대표자명  - 파트너가입시 필수',
         example: '홍길동',
     })
     @IsOptional()
@@ -195,7 +195,7 @@ export class SignupRequestDto {
     businessCeo?: string;
 
     @ApiPropertyOptional({
-        description: '사업자 우편번호 (5자리) - 탐정가입시 필수',
+        description: '사업자 우편번호 (5자리) - 파트너가입시 필수',
         example: '06236',
         minLength: 5,
         maxLength: 5,
@@ -214,7 +214,7 @@ export class SignupRequestDto {
         return Number.isNaN(n) ? value : n;
     })
     @ApiPropertyOptional({
-        description: '경력 연수 (년 단위) - 탐정가입시 필수',
+        description: '경력 연수 (년 단위) - 파트너가입시 필수',
         example: 5,
         minimum: 0,
     })
@@ -224,7 +224,7 @@ export class SignupRequestDto {
     careerYears?: number;
 
     @ApiPropertyOptional({
-        description: '주 활동 지역 - 탐정가입시 필수',
+        description: '주 활동 지역 - 파트너가입시 필수',
         example: '서울특별시',
     })
     @IsOptional()
@@ -240,7 +240,7 @@ export class SignupRequestDto {
     nickname?: string;
 
     @ApiPropertyOptional({
-        description: '전문분야 - 탐정가입시 필수',
+        description: '전문분야 - 파트너가입시 필수',
         enum: RequestCategory, 
         example: RequestCategory.AGREEMENT_DIVORCE_PROPERTY, 
     })
@@ -254,7 +254,7 @@ export class SignupRequestDto {
         return Number.isNaN(n) ? value : n;
     })
     @ApiPropertyOptional({
-        description: '최소수임 - 탐정가입시 필수',
+        description: '최소수임 - 파트너가입시 필수',
         example: 10000000, 
     })
     @IsOptional()
