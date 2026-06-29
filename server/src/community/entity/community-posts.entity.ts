@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { User } from "../../user/entity/user.entity";
+import { User } from "../../user/entity/users.entity";
 import { CommunityComment } from "./community-comments.entity";
 
 @Entity({ name: 'community_posts' })

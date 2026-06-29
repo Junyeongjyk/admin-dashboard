@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { User } from "./user.entity";
+import { User } from "./users.entity";
 import { LoginAction } from "../../common/enum/users.enum";
 
 @Entity({ name: 'user_auth_histories' })

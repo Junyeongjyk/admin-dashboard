@@ -1,7 +1,7 @@
 import { CanActivate, ExecutionContext, ForbiddenException, Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { InjectRepository } from "@nestjs/typeorm";
-import { User } from "../../user/entity/user.entity";
+import { User } from "../../user/entity/users.entity";
 import { Repository } from "typeorm";
 import { UserType } from "../enum/users.enum";
 import { PartnerProfiles } from "../../partner/entity/partner-profiles.entity";

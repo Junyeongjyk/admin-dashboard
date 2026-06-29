@@ -13,8 +13,6 @@ import { createKey, encrypt } from "../common/functions/aes.util";
 import { UserUpdateRequestDto } from "./dto/users-update.dto";
 import { UserUpdatePasswordRequestDto } from "./dto/users-update-password.dto";
 import { FilePath } from "../common/enum/common.enum";
-import { PartnerCertification } from "../partner/entity/partner-certifications.entity";
-import { PartnerCertificationStatus } from "../common/enum/partner.enum";
 import { PartnerProfiles } from "../partner/entity/partner-profiles.entity";
 import { RealtimeCredentialService } from "../mqtt/realtime-credential.service";
 import { Sign } from "../common/sign.helper";
@@ -77,14 +75,9 @@ export class UserService {
 
             user.name = dto.plainName
             user.phone = dto.plainPhoneNumber
-                    
             user.birthday = dto.birthDate
             user.gender = dto.gender
             user.userType = dto.userType
-            user.address = dto.plainAddress,
-            user.detailAddress = dto.plainDetailAddress
-            user.zipcode = dto.plainZipCode
-            user.marketingAgreed = dto.marketingAgreed ? dto.marketingAgreed : false 
 
             user.isActive = dto.userType !== UserType.PARTNER ? true : false
             const userInfo = await this.usersRepository.saveUser(user)
@@ -94,39 +87,12 @@ export class UserService {
                 profile.userId = userInfo.id;
                 profile.user = userInfo;
                 profile.nickname = !dto.nickname || dto.nickname == '' ? dto.plainName : dto.nickname;
-                profile.businessCeo = dto.businessCeo ?? '';
-                profile.businessAddress = dto.businessAddress;
-                profile.businessDetailAddress = dto.businessDetailAddress;
-                profile.businessNumber = dto.businessRegistrationNumber;
-                profile.businessZipcode = dto.businessZipCode;
-                profile.introduction = dto.introduction;
-                profile.careerYears = dto.careerYears ?? 0
-                profile.region = dto.mainActivityRegion
-                profile.minimumFee = dto.fee
-                profile.businessName = dto.businessName
 
                 if (profileImage) {
                     const profileImageSaved = saveUploadedFile(profileImage, `${FilePath.PROFILE}${userInfo.id}`)
                     profile.profilePath = profileImageSaved.savedPath
                 }
-
-                if (businessRegistrationImage) {
-                    const businessRegistrationImageSaved = saveUploadedFile(businessRegistrationImage, `${FilePath.BUSINESS}${userInfo.id}`)
-                    profile.businessFilePath = businessRegistrationImageSaved.savedPath
-                }
-
                 const profileInfo = await this.partnerRepository.savePartnerProfiles(profile)
-
-                if (licenseImage) { // 
-                    const licenseImageImageSaved = saveUploadedFile(licenseImage, `${FilePath.LICENSE}${userInfo.id}`)
-                    const certification = new PartnerCertification()
-                    certification.partnerId = profileInfo.id
-                    certification.certType = ''
-                    certification.certFileUrl = licenseImageImageSaved.savedPath
-                    certification.status = PartnerCertificationStatus.PENDING
-
-                    await this.partnerRepository.savePartnerCertification(certification)
-                }
             }
 
 
@@ -188,9 +154,6 @@ export class UserService {
             userInfo.detailAddress = dto.detailAddress
             userInfo.zipcode = dto.plainZipCode
             userInfo.phone = dto.plainPhone
-            userInfo.isNotificationAgreed = dto.notification
-            userInfo.isTwoFactorEnabled = dto.twoFactor
-
             userInfo.gender = dto.gender as Gender
 
             await this.usersRepository.saveUser(userInfo)

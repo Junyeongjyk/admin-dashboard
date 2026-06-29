@@ -45,16 +45,10 @@ export class UserRepository {
                 'u.identity AS identity',
                 'u.name AS name',
                 'u.email AS email',
-                'u.address AS address',
-                'u.zipcode AS zipcode',
-                'u.detail_address AS "detailAddress"',
-                'u.is_two_factor_enabled AS "isTwoFactorEnabled"',
                 'd.nickname AS nickname',
-                'u.is_notification_agreed AS "isNotificationAgreed"',
                 'u.user_type AS "userType"',
                 'u.email AS email',
                 'u.phone as phone',
-                'u.is_email_verified as "isEmailVerified"',
                 'u.gender AS gender' 
             ])
             .where('u.id = :id', { id })

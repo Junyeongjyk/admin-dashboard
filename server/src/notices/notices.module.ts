@@ -6,7 +6,7 @@ import { NoticesRepository } from "./notices.repository";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { Notices } from "./entity/notices.entity";
 import { JwtModule } from "@nestjs/jwt";
-import { User } from "../user/entity/user.entity";
+import { User } from "../user/entity/users.entity";
 
 @Module({
     imports: [
