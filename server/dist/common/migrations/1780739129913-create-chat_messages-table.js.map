@@ -1,0 +1,1 @@
+{"version":3,"file":"1780739129913-create-chat_messages-table.js","sourceRoot":"","sources":["../../../src/common/migrations/1780739129913-create-chat_messages-table.ts"],"names":[],"mappings":";;;AAEA,MAAa,oCAAoC;IACtC,KAAK,CAAC,EAAE,CAAC,WAAwB;QACpC,MAAM,WAAW,CAAC,KAAK,CAAC;;;;;;;;;;SAUvB,CAAC,CAAA;IACN,CAAC;IAEM,KAAK,CAAC,IAAI,CAAC,WAAwB;IAC1C,CAAC;CAEJ;AAlBD,oFAkBC"}

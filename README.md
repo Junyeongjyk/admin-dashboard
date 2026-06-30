@@ -33,9 +33,8 @@
 admin-dashboard는 다음과 같은 구조로 구성되어 있습니다:
 
 - admin-client: 관리자 UI
-- admin-server: 관리자 API 서버
 - user-client: 사용자 UI
-- user-server: 사용자 API 서버
+- server: API 서버
 
 👉 각 클라이언트는 REST API를 통해 서버와 통신합니다.
 
@@ -70,11 +69,10 @@ admin-dashboard는 다음과 같은 구조로 구성되어 있습니다:
 
 ## ⚙️ 실행 방법
 
-```bash
 # frontend
 npm install
 npm run dev
 
 # backend
 npm install
-npm run start
+npm run start:dev

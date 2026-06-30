@@ -1,0 +1,61 @@
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CommunityUserUpdateRequestDto = void 0;
+const swagger_1 = require("@nestjs/swagger");
+const class_validator_1 = require("class-validator");
+const community_eum_1 = require("../../common/enum/community.eum");
+class CommunityUserUpdateRequestDto {
+    postId;
+    title;
+    content;
+    category;
+}
+exports.CommunityUserUpdateRequestDto = CommunityUserUpdateRequestDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: '게시물 ID',
+        example: 1,
+        required: true,
+    }),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.IsNotEmpty)({ message: '게시물 ID는 필수 입력값입니다.' }),
+    __metadata("design:type", Number)
+], CommunityUserUpdateRequestDto.prototype, "postId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: '제목',
+        example: '제목을 수정합니다.',
+    }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)({ message: '게시물 제목은 필수 입력값입니다.' }),
+    __metadata("design:type", String)
+], CommunityUserUpdateRequestDto.prototype, "title", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: '내용',
+        example: '내용을 수정합니다.',
+    }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)({ message: '게시물 내용은 필수 입력값입니다.' }),
+    __metadata("design:type", String)
+], CommunityUserUpdateRequestDto.prototype, "content", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: '게시물 내용 유형(카테고리)',
+        enum: community_eum_1.CommunityPostType,
+        example: community_eum_1.CommunityPostType.QUESTION,
+        required: true,
+    }),
+    (0, class_validator_1.IsEnum)(community_eum_1.CommunityPostType, { message: '유효하지 않은 카테고리입니다.' }),
+    __metadata("design:type", String)
+], CommunityUserUpdateRequestDto.prototype, "category", void 0);
+//# sourceMappingURL=community-update.dto.js.map

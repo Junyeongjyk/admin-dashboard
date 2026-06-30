@@ -1,0 +1,1 @@
+{"version":3,"file":"notices-detail-data.dto.js","sourceRoot":"","sources":["../../../../src/notices/dto/data/notices-detail-data.dto.ts"],"names":[],"mappings":";;;;;;;;;;;;AAAA,6CAA8C;AAE9C,mEAAsD;AAGtD,MAAa,4BAA6B,SAAQ,mCAAW;IAOzD,OAAO,CAAQ;CAUlB;AAjBD,oEAiBC;AAVG;IALC,IAAA,qBAAW,EAAC;QACT,WAAW,EAAE,SAAS;QACtB,OAAO,EAAE,aAAa;QACtB,QAAQ,EAAE,IAAI;KACjB,CAAC;;6DACa"}
