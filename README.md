@@ -21,7 +21,7 @@
 - TypeScript
 
 ### Backend
-- NestJS
+- NextJS
 
 ### Database
 - MySQL
@@ -54,7 +54,7 @@ admin-dashboard는 다음과 같은 구조로 구성되어 있습니다:
 
 ---
 
-## 💡 내가 한 역할
+## 💡 역할
 
 - 전체 시스템 구조 설계 (Client / Server 분리)
 - REST API 연동 및 데이터 흐름 설계

@@ -8,8 +8,6 @@ const ScrollableContent = ({ title }) => {
         const isAtBottom = scrollTop + clientHeight >= scrollHeight - 1;
         const isAtTop = scrollTop <= 0;
 
-        // 아래로 내리는데 바닥이 아니거나, 위로 올리는데 천장이 아니면 
-        // 부모의 Fullpage 스크롤로 이벤트가 퍼지는 것을 막습니다.
         if ((e.deltaY > 0 && !isAtBottom) || (e.deltaY < 0 && !isAtTop)) {
             e.stopPropagation();
         }
@@ -30,7 +28,6 @@ const Dashboard = ({ userInfo, signupType }) => {
     const [current, setCurrent] = useState(0);
     const [isAnimating, setIsAnimating] = useState(false);
 
-    // 섹션 데이터 구성 (실제 컴포넌트로 교체하세요)
     const sections = [
         { id: 'main-slider', content: <div className="placeholder">Main Slider</div> },
         { id: 'community', content: <ScrollableContent title="커뮤니티 베스트" /> },

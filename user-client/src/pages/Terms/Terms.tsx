@@ -1,5 +1,5 @@
 import TermsList from "./TermsList";
-import "./Layout.scss";
+import "./Terms.scss";
 
 export default function Terms() {
   return (

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Modal from "utils/Modal";
 import DetailNotice from "./Modal/DetailNotice";
 import NoticeListTable from "./NoticeListTable";
-import { getAccessToken, got } from "src/utils/helpers";
+import { getAccessToken, got } from "src/utils/helper";
 import { ApiPath } from "src/types/enum/apiEnum";
 import { NoticesItem } from "src/types/notices.type";
 
