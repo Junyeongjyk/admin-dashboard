@@ -1,4 +1,33 @@
 export enum ApiPath{
     LOGIN = '/api/v1/auth/login', // 일반 로그인
     LOGOUT = '/api/v1/auth/logout', // 로그아웃
+    CHECK_IDENTITY = '/api/v1/auth/check-identity', // 아이디 중복 검사
+    SIGNUP = '/api/v1/auth/signup', // 일반 회원가입
+    NOTICES_LIST = '/api/v1/notices', // 공지사항 리스트 조회
+    NOTICES_DETAIL = '/api/v1/notices/', // 공지사항 상세 조회
+    FAQS_LIST = '/api/v1/faqs', // FAQ 리스트 조회
+    USER_INFO = '/api/v1/users/me', // 로그인 회원정보 조회/수정/삭제
+    USER_PASSWORD = '/api/v1/users/me/password', // 패스워드변경
+    DETECTIVE_INFO = '/api/v1/detectives/me', //로그인 탐정정보 조회/수정/삭제
+    COMMUNITY_POST_INFO = '/api/v1/community/posts', //커뮤니티 내용 등록, 수정, 삭제
+    COMMUNITY_POST_LIST = '/api/v1/community/posts/list', //커뮤니티 리스트 조회
+    COMMUNITY_COMMENT = '/api/v1/community/posts/comments', //커뮤니티 댓글 등록, 삭제
+    COMMUNITY_IMAGE = '/api/v1/community/posts/main/view',//커뮤니티 메인 이미지
+    DECTECTVIE_PROFILE_IMAGE = '/api/v1/auth/detective/profile/view',//파트너 프로필사진 이미지
+    ALARM_SELECT = '/api/v1/auth/alarm/select',//알람 조회 의뢰 관련
+    ALARM_OFF = '/api/v1/auth/alarm/off', //개별 알람 끄기
+    CHAT_LIST = '/api/v1/chat/list', //상대방 조회
+    CHAT_MESSAGE_LIST = '/api/v1/chat/messages', //의뢰/탐정채팅 메세지 조회
+    CHAT_ADMIN_MESSAGE_LIST = '/api/v1/chat/admin/messages', //관리자채팅 메세지 조회
+    CHAT_MESSAGE_SEND = '/api/v1/chat/send', //채팅 메세지 전송
+    CHAT_MESSAGE_READ = '/api/v1/chat/read', //채팅 메세지 읽음처리
+    SYSTEM_OPTION = '/api/v1/option', //채팅 메세지 읽음처리
+    FIND_IDENTITY = '/api/v1/auth/recover-identity', // 아이디 찾기
+    FIND_PASSWORD= '/api/v1/auth/reset-password/request', // 패스워드 찾기
+    FIND_PASSWORD_CONFRIM = '/api/v1/auth/reset-password/confirm', // 패스워드 찾기
+    BAN_WORDS = '/api/v1/ban/words', // 금지어 조회
+    CHAT_IMAGE_VIEW = '/api/v1/chat/image-view', // 상담 이미지 엔드포인트
+    CHAT_DOWNLOAD = '/api/v1/chat/download', // 금지어 조회
+    DISPUTE_SEND = '/api/v1/dispute/send', // 신고하기
+    DISPUTE_LIST = '/api/v1/dispute/list', // 신고 목록
 }
