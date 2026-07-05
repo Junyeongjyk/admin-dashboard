@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Modal from "utils/Modal";
+import Modal from "src/utils/Modal";
 import DetailNotice from "./Modal/DetailNotice";
 import NoticeListTable from "./NoticeListTable";
 import { getAccessToken, got } from "src/utils/helper";

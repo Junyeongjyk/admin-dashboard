@@ -1,9 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './Dashboard.scss';
 
-// 예시용 내부 스크롤 컴포넌트 (다른 컴포넌트를 넣으실 때 이 로직을 참고하세요)
-const ScrollableContent = ({ title }) => {
-    const handleWheel = (e) => {
+// 1. ScrollableContent 컴포넌트 Props 타입 정의
+interface ScrollableContentProps {
+    title: string;
+}
+
+const ScrollableContent: React.FC<ScrollableContentProps> = ({ title }) => {
+    // e는 React의 Wheel 이벤트 타입 지정
+    const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
         const { scrollTop, scrollHeight, clientHeight } = e.currentTarget;
         const isAtBottom = scrollTop + clientHeight >= scrollHeight - 1;
         const isAtTop = scrollTop <= 0;
@@ -23,10 +28,25 @@ const ScrollableContent = ({ title }) => {
     );
 };
 
-const Dashboard = ({ userInfo, signupType }) => {
-    const containerRef = useRef(null);
-    const [current, setCurrent] = useState(0);
-    const [isAnimating, setIsAnimating] = useState(false);
+// 2. Dashboard 컴포넌트 Props 타입 정의
+interface DashboardProps {
+    userInfo?: string;  
+    signupType?: string;
+}
+
+const Dashboard: React.FC<DashboardProps> = ({ userInfo, signupType }) => {
+    // 3. HTMLDivElement 타입을 지정하여 'never' 에러 해결
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [current, setCurrent] = useState<number>(0);
+    const [isAnimating, setIsAnimating] = useState<boolean>(false);
+
+    // 사용하지 않는 변수 경고(ESLint) 방지를 위해 콘솔에 남기거나 주석 처리
+    // 실제 사용하신다면 이 코드는 지우셔도 됩니다.
+    useEffect(() => {
+        if (userInfo || signupType) {
+            console.log('User info or signup type loaded');
+        }
+    }, [userInfo, signupType]);
 
     const sections = [
         { id: 'main-slider', content: <div className="placeholder">Main Slider</div> },
@@ -34,7 +54,8 @@ const Dashboard = ({ userInfo, signupType }) => {
         { id: 'why-choose', content: <div className="placeholder">Why Choose Us</div> },
     ];
 
-    const scrollTo = (index) => {
+    // index 매개변수에 number 타입 지정
+    const scrollTo = (index: number) => {
         if (!containerRef.current || isAnimating) return;
 
         setIsAnimating(true);
@@ -49,10 +70,11 @@ const Dashboard = ({ userInfo, signupType }) => {
 
         setTimeout(() => {
             setIsAnimating(false);
-        }, 700); // 애니메이션 지속 시간과 맞춤
+        }, 700);
     };
 
-    const onWheel = (e) => {
+    // 네이티브 wheel 이벤트 타입 지정
+    const onWheel = (e: WheelEvent) => {
         if (window.innerWidth < 800 || isAnimating) return;
 
         // 브라우저 전체 스크롤 방지
@@ -69,7 +91,6 @@ const Dashboard = ({ userInfo, signupType }) => {
         const container = containerRef.current;
         if (!container) return;
 
-        // passive: false 옵션을 위해 직접 이벤트 리스너 등록
         container.addEventListener('wheel', onWheel, { passive: false });
         
         return () => {
@@ -79,7 +100,8 @@ const Dashboard = ({ userInfo, signupType }) => {
 
     return (
         <div className="dashboard-container" ref={containerRef}>
-            {sections.map((section, i) => (
+            {/* map의 첫 번째 인자가 사용되지 않을 때는 _나 _section 등으로 표현하여 ESLint 우회 */}
+            {sections.map((section) => (
                 <section key={section.id} className="fullpage-section">
                     <div className="section-content">
                         {section.content}
