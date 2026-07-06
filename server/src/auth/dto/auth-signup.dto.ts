@@ -1,6 +1,6 @@
 import { ApiHideProperty, ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 import { Allow, IsBoolean, IsDateString, IsEmail, IsEnum, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString, IsUrl, Matches, Min } from 'class-validator';
-import { Gender, SignupPath, SignupType, UserType } from "../../common/enum/users.enum";
+import { Gender, SignupPath, SignupType, UserType } from "../../common/enum/user.enum";
 import { Transform } from "class-transformer";
 import { RequestCategory } from "../../common/enum/category.enum";
 

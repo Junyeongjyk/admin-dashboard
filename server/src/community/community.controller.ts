@@ -12,7 +12,7 @@ import { CommunityCommentCreateRequestDto } from "./dto/community-comment-create
 import { CommunityUserDetailResponseDto, CommunityCommentItem } from "./dto/data/community-detail-data.dto";
 import { CommunityCommentDeleteRequestDto } from "./dto/community-comment-delete.dto";
 import { Token } from "../common/token.decorator";
-import { UserType } from "../common/enum/users.enum";
+import { UserType } from "../common/enum/user.enum";
 import { TokenAuthGuard } from "../common/gaurds/token-auth.gaurds";
 import { Response } from 'express';
 

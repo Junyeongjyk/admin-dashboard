@@ -3,24 +3,24 @@ import { Body, Controller, Delete, HttpCode, HttpStatus, Patch, Post, Res, UseGu
 import { ApiTags } from "@nestjs/swagger";
 import { UserService } from "./system.service";
 import { ApiStdResponses } from "../config/swagger/api-response.decorator";
-import { UserDeleteMeDto } from "./dto/users-delete-me.dto";
+import { UserDeleteMeDto } from "./dto/user-delete-me.dto";
 import { TokenAuthGuard } from "../common/gaurds/token-auth.gaurds";
 import { Token } from "../common/token.decorator";
-import { UserType } from "../common/enum/users.enum";
-import { UserInfoResponseDto } from "./dto/data/users-info-data.dto";
-import { UserUpdateRequestDto } from "./dto/users-update.dto";
+import { UserType } from "../common/enum/user.enum";
+import { UserInfoResponseDto } from "./dto/data/user-info-data.dto";
+import { UserUpdateRequestDto } from "./dto/user-update.dto";
 import { DecryptAndValidateUpdatePipe } from "./pipes/auth.update.pipe";
-import { UserUpdatePasswordRequestDto } from "./dto/users-update-password.dto";
+import { UserUpdatePasswordRequestDto } from "./dto/user-update-password.dto";
 import { DecryptAndValidateUpdatePasswordPipe } from "./pipes/auth.update-password.pipe";
 import { Response } from 'express';
 
 @ApiTags('유저')
-@Controller('/users')
+@Controller('/user')
 @UseGuards(TokenAuthGuard)
 export class UserController {
 
     constructor(
-        private readonly usersService: UserService,
+        private readonly userService: UserService,
     ) {}
 
     @Post('/me')
@@ -35,7 +35,7 @@ export class UserController {
     })
     
     async userInfo(@Token([UserType.USER, UserType.PARTNER]) token:any) {
-        return await this.usersService.getUserInfo(token);
+        return await this.userService.getUserInfo(token);
     }
 
     
@@ -54,7 +54,7 @@ export class UserController {
         @Body(DecryptAndValidateUpdatePipe) dto: UserUpdateRequestDto,
         @Token([UserType.USER, UserType.PARTNER]) token:any
     ) {
-        return await this.usersService.updateUser(dto, token);
+        return await this.userService.updateUser(dto, token);
     }
 
     @Patch('/me/password')
@@ -71,7 +71,7 @@ export class UserController {
         @Body(DecryptAndValidateUpdatePasswordPipe) dto: UserUpdatePasswordRequestDto,
         @Token([UserType.USER, UserType.PARTNER]) token:any
     ) {
-        return await this.usersService.updatePassword(dto, token);
+        return await this.userService.updatePassword(dto, token);
     }
 
     @Delete('/me')
@@ -88,7 +88,7 @@ export class UserController {
         @Token([UserType.USER, UserType.PARTNER]) token:any,
         @Res({ passthrough: true }) res: Response,
     ) {
-        return await this.usersService.deleteMe(dto, token, res);
+        return await this.userService.deleteMe(dto, token, res);
     }
 }
 

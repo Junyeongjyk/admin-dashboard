@@ -1,15 +1,15 @@
 import { Injectable } from "@nestjs/common";
-import { User } from "../../user/entity/users.entity";
+import { User } from "../../user/entity/user.entity";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { UserListRequestDto } from "../user/dto/users-list.dto";
+import { UserListRequestDto } from "../user/dto/user-list.dto";
 import { PartnerProfiles } from "../../partner/entity/partner-profiles.entity";
 
 @Injectable()
 export class PartnerRepository {
     constructor(
         @InjectRepository(User)
-        private readonly usersRepository: Repository<User>,
+        private readonly userRepository: Repository<User>,
         @InjectRepository(PartnerProfiles)
         private readonly partnerProfiles: Repository<PartnerProfiles>,
     ) {}
@@ -17,7 +17,7 @@ export class PartnerRepository {
     async getList(dto: UserListRequestDto): Promise<any> {
         const { page = 0, size = 20, q, orderColumn, orderSort } = dto;
 
-        const queryBuilder = this.usersRepository.createQueryBuilder('u')
+        const queryBuilder = this.userRepository.createQueryBuilder('u')
             .leftJoinAndSelect('u.partnerProfile', 'partnerProfile')
             .leftJoinAndSelect('partnerProfile.certifications', 'certifications')
             .where('u.userType = :userType', { userType: 'PARTNER' })

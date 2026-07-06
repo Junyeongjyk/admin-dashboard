@@ -34,7 +34,7 @@ export class CommunityRepository {
 
         const queryBuilder = this.communityPostRepository
             .createQueryBuilder('comPost')
-            .leftJoinAndSelect('comPost.author', 'users')
+            .leftJoinAndSelect('comPost.author', 'user')
             .where('comPost.is_deleted IS NOT TRUE')
             .orderBy('comPost.id', 'DESC')
             .skip((page - 1) * size)
@@ -111,7 +111,7 @@ export class CommunityRepository {
                     )
                 `)
                 .from('community_comments', 'cc')
-                .leftJoin('users', 'cu', 'cu.id = cc.author_id')
+                .leftJoin('user', 'cu', 'cu.id = cc.author_id')
                 .where('cc.post_id = c.id')
                 .andWhere('cc.is_deleted IS NOT TRUE');
             }, 'comments')

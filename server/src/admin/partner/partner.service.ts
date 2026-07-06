@@ -1,6 +1,6 @@
 import { HttpException, Injectable, InternalServerErrorException, NotFoundException } from "@nestjs/common";
 import { handleSend, log } from "../../config/log.tools.config";
-import { UserListRequestDto } from "../user/dto/users-list.dto";
+import { UserListRequestDto } from "../user/dto/user-list.dto";
 import { PartnerRepository } from "./partner.repository";
 
 @Injectable()

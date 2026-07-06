@@ -5,7 +5,7 @@ import { FileFieldsInterceptor } from '@nestjs/platform-express'
 import { UseInterceptors, UploadedFiles } from '@nestjs/common'
 import { PartnerService } from "./partner.service";
 import { Token } from "../common/token.decorator";
-import { UserType } from "../common/enum/users.enum";
+import { UserType } from "../common/enum/user.enum";
 import { PartnerUpdateProfileRequestDto } from "./dto/partner-update-profile.dto";
 
 @ApiTags('파트너')

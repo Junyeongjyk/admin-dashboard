@@ -3,15 +3,15 @@ import { handleSend, log } from "../config/log.tools.config";
 import { UserRepository } from "./user.repository";
 import { User } from "./entity/user.entity";
 import { getHex512 } from "../common/functions/common";
-import { Gender, SignupPath, UserType } from "../common/enum/users.enum";
+import { Gender, SignupPath, UserType } from "../common/enum/user.enum";
 import { PartnerRepository } from "../partner/partner.repository";
 import { saveUploadedFile } from "../common/functions/file-save.util";
-import { UserDeleteMeDto } from "./dto/users-delete-me.dto";
-import { UserAlamRequestDto } from "./dto/users-alam.dto";
+import { UserDeleteMeDto } from "./dto/user-delete-me.dto";
+import { UserAlamRequestDto } from "./dto/user-alam.dto";
 import { SignupRequestDto } from "../auth/dto/auth-signup.dto";
 import { createKey, encrypt } from "../common/functions/aes.util";
-import { UserUpdateRequestDto } from "./dto/users-update.dto";
-import { UserUpdatePasswordRequestDto } from "./dto/users-update-password.dto";
+import { UserUpdateRequestDto } from "./dto/user-update.dto";
+import { UserUpdatePasswordRequestDto } from "./dto/user-update-password.dto";
 import { FilePath } from "../common/enum/common.enum";
 import { PartnerProfiles } from "../partner/entity/partner-profiles.entity";
 import { RealtimeCredentialService } from "../mqtt/realtime-credential.service";
@@ -22,7 +22,7 @@ import { Response } from 'express';
 export class UserService {
 
     constructor(
-        private readonly usersRepository: UserRepository,
+        private readonly userRepository: UserRepository,
         private readonly partnerRepository: PartnerRepository,
         private readonly realtimeCredentialService: RealtimeCredentialService,
         private sign: Sign,
@@ -39,13 +39,13 @@ export class UserService {
             //아이디 중복 검사
             if (dto.provider == SignupPath.NORMAL) {
                 //이메일 중복 검사
-                const isAvailable  = await this.usersRepository.isIdentityAvailable(dto.plainIdentity);
+                const isAvailable  = await this.userRepository.isIdentityAvailable(dto.plainIdentity);
                 if (!isAvailable ) {
                     throw new ConflictException('이미 존재하는 아이디입니다.');
                 } 
             } else {
                 //snsid 중복검사
-                const isSnsAvailable =  await this.usersRepository.isSnsAvailable(dto.plainProviderUserId)
+                const isSnsAvailable =  await this.userRepository.isSnsAvailable(dto.plainProviderUserId)
                 if (!isSnsAvailable ) {
                     throw new ConflictException('이미 존재하는 아이디입니다.');
                 } 
@@ -80,7 +80,7 @@ export class UserService {
             user.userType = dto.userType
 
             user.isActive = dto.userType !== UserType.PARTNER ? true : false
-            const userInfo = await this.usersRepository.saveUser(user)
+            const userInfo = await this.userRepository.saveUser(user)
             if (dto.userType === UserType.PARTNER) {
 
                 const profile = new PartnerProfiles();
@@ -112,7 +112,7 @@ export class UserService {
     async getUserInfo(token:any) {
         try {
             
-            let info = await this.usersRepository.findById(token.id);
+            let info = await this.userRepository.findById(token.id);
             if (!info) {
                 throw new NotFoundException('회원정보  존재하지 않습니다.')
             }
@@ -143,7 +143,7 @@ export class UserService {
     async updateUser(dto: UserUpdateRequestDto, token:any) {
         try {
           
-            const userInfo = await this.usersRepository.findByIdInfo(token.id)
+            const userInfo = await this.userRepository.findByIdInfo(token.id)
             if (!userInfo) {
                 throw new NotFoundException('존재하지 않는 사용자 입니다.')
             }
@@ -156,7 +156,7 @@ export class UserService {
             userInfo.phone = dto.plainPhone
             userInfo.gender = dto.gender as Gender
 
-            await this.usersRepository.saveUser(userInfo)
+            await this.userRepository.saveUser(userInfo)
             return handleSend()
             
         } catch (error) {
@@ -173,7 +173,7 @@ export class UserService {
     async updatePassword(dto: UserUpdatePasswordRequestDto, token:any) {
         try {
           
-            const userInfo = await this.usersRepository.findByIdInfo(token.id)
+            const userInfo = await this.userRepository.findByIdInfo(token.id)
             if (!userInfo) {
                 throw new NotFoundException('존재하지 않는 사용자 입니다.')
             }
@@ -183,7 +183,7 @@ export class UserService {
             }
 
             userInfo.password = getHex512(dto.plainPassword)
-            await this.usersRepository.saveUser(userInfo)
+            await this.userRepository.saveUser(userInfo)
             
             return handleSend()
             
@@ -203,7 +203,7 @@ export class UserService {
     async deleteMe(dto: UserDeleteMeDto, token:any, res: Response) {
         try {
             
-            const userInfo = await this.usersRepository.findByIdInfo(token.id)
+            const userInfo = await this.userRepository.findByIdInfo(token.id)
             if (!userInfo) {
                 throw new NotFoundException('유저 또는 파트너정보가 존재하지 않습니다.')
             }
@@ -221,7 +221,7 @@ export class UserService {
             userInfo.isDeleted = true
             userInfo.deletedAt = new Date()
             
-            await this.usersRepository.saveUser(userInfo)
+            await this.userRepository.saveUser(userInfo)
            
             return handleSend()
             

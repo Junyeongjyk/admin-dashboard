@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { User } from "../../user/entity/users.entity";
+import { User } from "../../user/entity/user.entity";
 
 @Entity({ name: 'partner_profiles' })
 export class PartnerProfiles {
@@ -8,7 +8,7 @@ export class PartnerProfiles {
     id: number;
     
     /**
-     * users.id (1:1)
+     * user.id (1:1)
      */
     @Column({ type: 'bigint', name: 'user_id' })
     userId: number;

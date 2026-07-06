@@ -1,5 +1,5 @@
 import { ApiPropertyOptional } from "@nestjs/swagger";
-import { Gender } from "../../../common/enum/users.enum";
+import { Gender } from "../../../common/enum/user.enum";
 
 export class UserInfoResponseDto {
 

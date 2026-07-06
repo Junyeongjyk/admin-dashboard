@@ -40,8 +40,6 @@ const Dashboard: React.FC<DashboardProps> = ({ userInfo, signupType }) => {
     const [current, setCurrent] = useState<number>(0);
     const [isAnimating, setIsAnimating] = useState<boolean>(false);
 
-    // 사용하지 않는 변수 경고(ESLint) 방지를 위해 콘솔에 남기거나 주석 처리
-    // 실제 사용하신다면 이 코드는 지우셔도 됩니다.
     useEffect(() => {
         if (userInfo || signupType) {
             console.log('User info or signup type loaded');

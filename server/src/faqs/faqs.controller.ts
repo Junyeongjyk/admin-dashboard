@@ -7,7 +7,7 @@ import { FaqsService } from "./faqs.service";
 import { FaqsListResponseDto } from "./dto/data/faqs-list-data.dto";
 import { TokenAuthGuard } from "../common/gaurds/token-auth.gaurds";
 import { Token } from "../common/token.decorator";
-import { UserType } from "../common/enum/users.enum";
+import { UserType } from "../common/enum/user.enum";
 
 @ApiTags('FAQ')
 @Controller('faqs')

@@ -6,7 +6,7 @@ export class CreatePartnerProfilesTable1780739100173 implements MigrationInterfa
         await queryRunner.query(`
             CREATE TABLE partner_profiles (
                 id BIGINT PRIMARY KEY,
-                user_id BIGINT UNIQUE NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+                user_id BIGINT UNIQUE NOT NULL REFERENCES user(id) ON DELETE CASCADE,
                 nickname VARCHAR(50) NOT NULL,
                 introduction TEXT,
                 created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,

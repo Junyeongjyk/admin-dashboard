@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createKey, encrypt, getDecryptData } from "src/utils/aes.utils";
-import { createDeviceId, getCookie, setCookie, got } from "src/utils/helper";
+import { getCookie, setCookie, got } from "src/utils/helper";
 import { ApiPath } from "src/types/enum/apiEnum";
 import "./Login.scss";
 
@@ -23,7 +23,7 @@ export default function Login() {
         password: await encrypt(key, password),
         provider: "NORMAL",
         uuid,
-        deviceId: createDeviceId(),
+        // deviceId: createDeviceId(),
       };
 
       const response = await got(ApiPath.LOGIN, "POST", params);

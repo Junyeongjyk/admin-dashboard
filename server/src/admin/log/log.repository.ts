@@ -19,7 +19,7 @@ export class LogRepository {
         orderSort?:'ASC' | 'DESC' ) {
 
         const queryBuilder = this.userAuthHistoriesRepository.createQueryBuilder('h')
-                                .leftJoin('users', 'u', 'h.user_id = u.id')
+                                .leftJoin('user', 'u', 'h.user_id = u.id')
                                 .leftJoin('user_social_accounts', 's', 's.user_id = u.id')
                                 .select([
                                     'h.id AS id',

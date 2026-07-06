@@ -1,0 +1,1 @@
+export const REALTIME_TOPIC = 'v1/realtime';

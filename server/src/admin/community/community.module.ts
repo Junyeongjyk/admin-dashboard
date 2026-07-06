@@ -3,7 +3,7 @@ import { Module } from "@nestjs/common";
 import { CommunityController } from "./community.controller";
 import { CommunityService } from "./community.service";
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from "../../user/entity/users.entity";
+import { User } from "../../user/entity/user.entity";
 import { CommunityPost } from "../../community/entity/community-posts.entity";
 import { CommunityComment } from "../../community/entity/community-comments.entity";
 import { CommunityRepository } from "./community.repository";

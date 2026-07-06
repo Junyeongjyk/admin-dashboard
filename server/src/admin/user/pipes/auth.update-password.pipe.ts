@@ -1,7 +1,7 @@
 import { Injectable, PipeTransform } from "@nestjs/common";
 import { getDecryptData } from "../../common/functions/aes.util";
 import { validateIdentity, validatePassword } from "../../common/functions/validate";
-import { UserUpdatePasswordRequestDto } from "../dto/users-update-password.dto";
+import { UserUpdatePasswordRequestDto } from "../dto/user-update-password.dto";
 
 
 @Injectable()

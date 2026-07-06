@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import type { CommunityItem } from "src/types/community.type";
 import { CommunityCategoryLabel, CommunityPostType } from "src/types/enum/communityEnum";
 import { ApiPath } from "src/types/enum/apiEnum";
-import "./Community.scss"; // SCSS 임포트
+import "./Community.scss"; 
 
 interface CommunityProps {
     tableList: CommunityItem[];

@@ -9,7 +9,7 @@ export class CreateCommunityPostsTable1777543533669 implements MigrationInterfac
                 category VARCHAR(50),
                 title VARCHAR(200) NOT NULL,
                 content TEXT,
-                author_id BIGINT NOT NULL REFERENCES users(id),
+                author_id BIGINT NOT NULL REFERENCES user(id),
                 view_count INT DEFAULT 0,
                 like_count INT DEFAULT 0,
                 is_hidden BOOLEAN DEFAULT FALSE,

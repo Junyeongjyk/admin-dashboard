@@ -1,6 +1,6 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { User } from "./users.entity";
-import { LoginAction } from "../../common/enum/users.enum";
+import { User } from "./user.entity";
+import { LoginAction } from "../../common/enum/user.enum";
 
 @Entity({ name: 'user_auth_histories' })
 export class UserAuthHistories {

@@ -1,6 +1,6 @@
 import { ApiHideProperty, ApiProperty } from "@nestjs/swagger";
 import { Allow, IsBoolean, IsNotEmpty, IsString, Matches } from "class-validator";
-import { Gender } from "../../common/enum/users.enum";
+import { Gender } from "../../common/enum/user.enum";
 
 export class UserUpdateRequestDto {
 

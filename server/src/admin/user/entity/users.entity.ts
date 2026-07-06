@@ -1,6 +1,6 @@
 import { Column, CreateDateColumn, Entity, Index, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
-@Entity('users')
+@Entity('user')
 export class User {
     @PrimaryGeneratedColumn({comment: 'id'})
     id: number;

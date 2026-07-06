@@ -8,7 +8,7 @@ import { NoticesUserDetailResponseDto } from "./dto/data/notices-detail-data.dto
 import { NoticesListRequestDto } from "./dto/notices-list.dto";
 import { TokenAuthGuard } from "../common/gaurds/token-auth.gaurds";
 import { Token } from "../common/token.decorator";
-import { UserType } from "../common/enum/users.enum";
+import { UserType } from "../common/enum/user.enum";
 
 @ApiTags('공지사항')
 @Controller('notices')

@@ -1,9 +1,9 @@
 import { CanActivate, ExecutionContext, ForbiddenException, Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { InjectRepository } from "@nestjs/typeorm";
-import { User } from "../../user/entity/users.entity"
+import { User } from "../../user/entity/user.entity"
 import { Repository } from "typeorm";
-import { UserType } from "../enum/users.enum";
+import { UserType } from "../enum/user.enum";
 import { PartnerProfiles } from "../../partner/entity/partner-profiles.entity";
 
 @Injectable()
@@ -12,7 +12,7 @@ export class TokenAuthGuard implements CanActivate {
     constructor(
         private jwtService: JwtService,
         @InjectRepository(User)
-        private readonly usersRepository: Repository<User>,
+        private readonly userRepository: Repository<User>,
         @InjectRepository(PartnerProfiles)
         private readonly partnerProfilesRepository: Repository<PartnerProfiles>,
     ) {}
@@ -27,7 +27,7 @@ export class TokenAuthGuard implements CanActivate {
             if (!token) new ForbiddenException('허용되지 않은 요청입니다.')
 
             const decoded = await this.jwtService.verifyAsync(token);
-            const user = await this.usersRepository.createQueryBuilder('user')
+            const user = await this.userRepository.createQueryBuilder('user')
                 .where('user.id = :id', {id: decoded.id})
                 .getOne();
             
@@ -73,7 +73,7 @@ export class TokenAdminAuthGuard implements CanActivate {
   constructor(
     private readonly jwtService: JwtService,
     @InjectRepository(User)
-    private readonly usersRepository: Repository<User>,
+    private readonly userRepository: Repository<User>,
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -87,7 +87,7 @@ export class TokenAdminAuthGuard implements CanActivate {
     try {
       const decoded = await this.jwtService.verifyAsync(token);
 
-      const admin = await this.usersRepository.findOne({
+      const admin = await this.userRepository.findOne({
         where: { id: decoded.id }
       });
 

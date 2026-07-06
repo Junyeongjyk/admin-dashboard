@@ -4,7 +4,7 @@ import { PartnerController } from "./partner.controller";
 import { PartnerService } from "./partner.service";
 import { PartnerRepository } from "./partner.repository";
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from '../../user/entity/users.entity';
+import { User } from '../../user/entity/user.entity';
 import { PartnerProfiles } from "../../partner/entity/partner-profiles.entity";
 
 @Module({

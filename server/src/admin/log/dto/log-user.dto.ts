@@ -1,7 +1,7 @@
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 import { LogType } from "../../../common/enum/log.enum";
 import { IsEnum, IsNumber, IsOptional, IsString } from "class-validator";
-import { UserType } from "../../../common/enum/users.enum";
+import { UserType } from "../../../common/enum/user.enum";
 
 export class LogUserRequestDto {
     @ApiPropertyOptional({

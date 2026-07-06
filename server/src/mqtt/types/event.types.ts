@@ -1,0 +1,6 @@
+export enum EventType {
+  CHAT_MESSAGE_CREATE = 'CHAT_MESSAGE_CREATE',
+  CHAT_MESSAGE_READ   = 'CHAT_MESSAGE_READ',
+  AUTH_FORCE_LOGOUT   = 'AUTH_FORCE_LOGOUT', //중복 로그아웃
+  ERROR               = 'ERROR',
+}

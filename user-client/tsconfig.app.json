@@ -16,7 +16,6 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
-    /* ✅ 여기 추가 (alias 핵심) */
     "baseUrl": ".",
     "paths": {
       "src/*": ["src/*"],

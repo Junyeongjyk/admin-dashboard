@@ -6,7 +6,7 @@ export class CreateChatMessagesTable1780739129913 implements MigrationInterface 
             CREATE TABLE chat_messages (
                 id BIGINT PRIMARY KEY,
                 chat_room_id BIGINT NOT NULL REFERENCES chat_rooms(id) ON DELETE CASCADE,
-                sender_id BIGINT NOT NULL REFERENCES users(id),
+                sender_id BIGINT NOT NULL REFERENCES user(id),
                 message_type VARCHAR(20) NOT NULL,
                 content TEXT,
                 is_deleted BOOLEAN DEFAULT FALSE,

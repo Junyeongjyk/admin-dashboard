@@ -1,6 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 import { IsEnum, IsNumber, IsOptional, IsString } from "class-validator";
-import { UserStatus } from "../../../../common/enum/users.enum";
+import { UserStatus } from "../../../../common/enum/user.enum";
 
 
 class UserItem {

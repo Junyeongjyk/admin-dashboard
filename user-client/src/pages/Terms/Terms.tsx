@@ -4,8 +4,7 @@ import "./Terms.scss";
 export default function Terms() {
   return (
     <div className="content">
-      <h1>Terms</h1>
-      <p>이용약관</p>
+      <h2>이용약관</h2>
       <TermsList/>
     </div>
   );

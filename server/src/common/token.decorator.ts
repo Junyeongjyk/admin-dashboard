@@ -1,6 +1,6 @@
 import { BadRequestException, createParamDecorator, ExecutionContext, UnauthorizedException } from "@nestjs/common";
 import * as jwt from 'jsonwebtoken';
-import { UserType } from "./enum/users.enum";
+import { UserType } from "./enum/user.enum";
 
 export const Token = createParamDecorator((data: string | String[], ctx: ExecutionContext): object => {
 
