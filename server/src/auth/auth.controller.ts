@@ -17,11 +17,11 @@ import { DecryptAndValidateRecoverIdentityPipe } from "./pipes/auth-recover-iden
 import { DecryptAndValidateResetPasswordComfirmPipe } from "./pipes/auth.reset-password-comfirm.pipe";
 import { ResetPasswordComfirmRequestDto } from "./dto/auth-reset-password-comfirm.dto";
 import { SignupRequestDto } from "./dto/auth-signup.dto";
+import { SignoutRequestDto } from "./dto/auth-signout.dto";
 import { RealIP } from "nestjs-real-ip";
 import { UserType } from "../common/enum/user.enum";
 import { Token } from "../common/token.decorator";
 import { TokenAuthGuard } from "../common/gaurds/token-auth.gaurds";
-import { RequestsClientBasicRequestDto } from "../requests/dto/requests-basic.dto";
 
 @ApiTags('보안')
 @Controller('auth')
@@ -201,15 +201,6 @@ export class AuthController {
         @Token([UserType.USER, UserType.PARTNER]) token:any) 
     {
         return await this.authService.alarmSelect(token);
-    }
-
-    @ApiExcludeEndpoint()
-    @Post('/alarm/off')
-    async alarmOff(
-        @Body() dto: RequestsClientBasicRequestDto,
-        @Token([UserType.USER, UserType.PARTNER]) token:any) 
-    {
-        return await this.authService.alarmOff(dto, token);
     }
 
     @ApiExcludeEndpoint()

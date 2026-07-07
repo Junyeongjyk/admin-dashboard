@@ -2,7 +2,7 @@ import { ApiHideProperty, ApiProperty, ApiPropertyOptional } from "@nestjs/swagg
 import { Allow, IsBoolean, IsDateString, IsEmail, IsEnum, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString, IsUrl, Matches, Min } from 'class-validator';
 import { Gender, SignupPath, SignupType, UserType } from "../../common/enum/user.enum";
 import { Transform } from "class-transformer";
-import { RequestCategory } from "../../common/enum/category.enum";
+import { RequestCategory } from "../../common/enum/category.eum";
 
 export class SignupRequestDto {
 
