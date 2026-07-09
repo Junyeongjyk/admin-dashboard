@@ -1,6 +1,6 @@
 import { ApiHideProperty, ApiProperty } from "@nestjs/swagger";
 import { Allow, IsEnum, IsNotEmpty, IsOptional, IsString } from "class-validator";
-import { SignupPath } from "../../common/enum/users.enum";
+import { SignupPath } from "../../common/enum/user.enum";
 
 export class SigninRequestDto {
     @ApiProperty({

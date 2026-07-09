@@ -195,18 +195,18 @@ export class AuthController {
     }
 
     //알람
-    @ApiExcludeEndpoint()
-    @Post('/alarm/select')
-    async alarmSelect(
-        @Token([UserType.USER, UserType.PARTNER]) token:any) 
-    {
-        return await this.authService.alarmSelect(token);
-    }
+    // @ApiExcludeEndpoint()
+    // @Post('/alarm/select')
+    // async alarmSelect(
+    //     @Token([UserType.USER, UserType.PARTNER]) token:any) 
+    // {
+    //     return await this.authService.alarmSelect(token);
+    // }
 
     @ApiExcludeEndpoint()
-    @Get('/detective/profile/view/:id')
-    async detectiveProfileImageView(@Param('id') id: number, @Res() res: Response) {
-        return await this.authService.getDetectiveProfileImage(id, res)
+    @Get('/partner/profile/view/:id')
+    async partnerProfileImageView(@Param('id') id: number, @Res() res: Response) {
+        return await this.authService.getPartnerProfileImage(id, res)
     }
 
 }

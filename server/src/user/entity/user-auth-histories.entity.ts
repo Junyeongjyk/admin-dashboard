@@ -6,21 +6,21 @@ import { LoginAction } from "../../common/enum/user.enum";
 export class UserAuthHistories {
 
     @PrimaryGeneratedColumn()
-    id: number;
+    id?: number;
 
     @Column({ name: 'user_id', type: 'bigint', nullable: true })
-    userId: number | null;
+    userId?: number | null;
 
     @ManyToOne(() => User, { onDelete: 'CASCADE' })
     @JoinColumn({ name: 'user_id' })
-    user: User;
+    user?: User;
 
     @Column({
         type: 'enum',
         enum: LoginAction,
         comment: 'LOGIN | LOGOUT',
     })
-    action: string;
+    action?: string;
 
 
     @Column({
@@ -29,14 +29,14 @@ export class UserAuthHistories {
         length: 45,
         nullable: true,
     })
-    ipAddress: string | null;
+    ipAddress?: string | null;
 
     @Column({
         name: 'user_agent',
         type: 'text',
         nullable: true,
     })
-    userAgent: string | null;
+    userAgent?: string | null;
 
     @Column({
         name: 'uuid',
@@ -44,14 +44,14 @@ export class UserAuthHistories {
         nullable: true,
         comment: '모바일 앱 디바이스 UUID',
     })
-    uuid: string | null;
+    uuid?: string | null;
 
     @Column({
         name: 'is_success',
         type: 'boolean',
         default: true,
     })
-    isSuccess: boolean;
+    isSuccess?: boolean;
 
     @Column({
         name: 'fail_reason',
@@ -59,12 +59,12 @@ export class UserAuthHistories {
         length: 100,
         nullable: true,
     })
-    failReason: string | null;
+    failReason?: string | null;
 
     @CreateDateColumn({
         name: 'created_at',
         type: 'timestamptz',
         default: () => 'CURRENT_TIMESTAMP',
     })
-    createdAt: Date;
+    createdAt?: Date;
 }

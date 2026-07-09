@@ -1,4 +1,4 @@
-import { UserType } from "../../common/enum/users.enum";
+import { UserType } from "../../common/enum/user.enum";
 import { EventType } from "./event.types";
 
 // export type EventType =

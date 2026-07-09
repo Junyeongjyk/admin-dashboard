@@ -4,7 +4,7 @@ import { RedisKeys, RedisTTL } from "../redis/redis-keys";
 import { REDIS } from "../redis/redis.module";
 import Redis from "ioredis";
 import { generate6DigitCode, getHex512, maskEmail, nowKstIso } from "../common/functions/common";
-import { SigninRequestDto } from "./dto/auth-signup.dto";
+import { SigninRequestDto } from "./dto/auth-signin.dto";
 import { UserRepository } from "../user/user.repository";
 import { LoginAction, SignupPath, UserType } from "../common/enum/user.enum";
 import { createKey, encrypt } from "../common/functions/aes.util";

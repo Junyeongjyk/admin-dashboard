@@ -4,7 +4,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { UserAuthHistories } from "./entity/user-auth-histories.entity";
 import { UserInfoResponseDto } from "./dto/data/users-info-data.dto";
-import { UserType } from "../common/enum/users.enum";
+import { UserType } from "../common/enum/user.enum";
 
 @Injectable()
 export class UserRepository {

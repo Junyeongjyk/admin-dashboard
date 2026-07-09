@@ -2,18 +2,17 @@ import { ApiHideProperty, ApiProperty, ApiPropertyOptional } from "@nestjs/swagg
 import { Allow, IsBoolean, IsDateString, IsEmail, IsEnum, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString, IsUrl, Matches, Min } from 'class-validator';
 import { Gender, SignupPath, SignupType, UserType } from "../../common/enum/user.enum";
 import { Transform } from "class-transformer";
-import { RequestCategory } from "../../common/enum/category.eum";
 
 export class SignupRequestDto {
 
     @ApiProperty({
         description: '가입유형',
         enum: SignupType, 
-        example: SignupType.CLIENT, 
+        example: SignupType.USER, 
         required: true,
     })
     @IsEnum(SignupType, { message: '유효하지 않은 가입유형입니다.' })
-    userType: UserType;
+    userType?: UserType;
 
     @ApiProperty({
         description: '가입경로',
@@ -22,7 +21,7 @@ export class SignupRequestDto {
         required: true,
     })
     @IsEnum(SignupPath, { message: '유효하지 않은 가입경로유형입니다.' })
-    provider: SignupPath
+    provider?: SignupPath
 
     @ApiProperty({ 
         description: '사용자 식별자 이메일 - 암호화 필요 - sns 가입시 공백 ', 
@@ -31,7 +30,7 @@ export class SignupRequestDto {
     })
     @IsString()
     @IsNotEmpty({ message: '이메일는 필수 입력값입니다.' })
-    identity: string
+    identity?: string
 
     @ApiProperty({
         description: '비밀번호 8~20자 특수문자 2개이상 포함 - 암호화 필요 - sns 가입시 공백 ',
@@ -39,7 +38,7 @@ export class SignupRequestDto {
     }) 
     @IsString()
     @IsNotEmpty({ message: '비밀번호는 필수 입력값입니다.' })
-    password: string;
+    password?: string;
 
     @ApiProperty({
         description: '이름 - 암호화 필요',
@@ -48,7 +47,7 @@ export class SignupRequestDto {
     })
     @IsString()
     @IsNotEmpty({ message: '이름은 필수 입력값입니다.' })
-    name: string;
+    name?: string;
 
     @ApiProperty({
         description: '주소 (도로명 또는 지번) - 암호화 필요',
@@ -57,7 +56,7 @@ export class SignupRequestDto {
     })
     @IsString()
     @IsNotEmpty({ message: '주소는 필수 입력값입니다.' })
-    address: string;
+    address?: string;
 
     @ApiProperty({
         description: '상세 주소 (동·호수 등)',
@@ -66,7 +65,7 @@ export class SignupRequestDto {
     })
     @IsString()
     @IsNotEmpty({ message: '상세주소는 필수 입력값입니다.' })
-    detailAddress: string;
+    detailAddress?: string;
 
     @ApiProperty({
         description: '우편번호 (5자리) - 암호화 필요',
@@ -74,7 +73,7 @@ export class SignupRequestDto {
     })
     @IsString()
     @IsNotEmpty({ message: '우편번호는 필수 입력값입니다.' })
-    zipCode: string;
+    zipCode?: string;
 
     @ApiProperty({
         description: '생년월일 (YYYY-MM-DD)',
@@ -83,7 +82,7 @@ export class SignupRequestDto {
     })
     @IsNotEmpty({ message: '생년월일은 필수 입력값입니다.' })
     @IsDateString({}, { message: '올바른 날짜 형식이 아닙니다.' })
-    birthDate: string;
+    birthDate?: string;
 
     @ApiProperty({
         description: '성별 (MALE: 남성, FEMALE: 여성)',
@@ -93,7 +92,7 @@ export class SignupRequestDto {
     })
     @IsEnum(Gender, { message: '성별는 MALE 또는 FEMALE만 가능합니다.' })
     @IsNotEmpty({ message: '성별는 필수 입력값입니다.' })
-    gender: Gender; 
+    gender?: Gender; 
 
     @ApiProperty({
         description: '휴대폰 번호 (숫자만 입력) - 암호화 필요',
@@ -102,7 +101,7 @@ export class SignupRequestDto {
     })
     @IsString()
     @IsNotEmpty({ message: '전화번호는 필수 입력값입니다.' })
-    phoneNumber: string;
+    phoneNumber?: string;
 
     @Transform(({ value }) => {
         if (value === undefined || value === null || value === '') return undefined;
@@ -122,7 +121,6 @@ export class SignupRequestDto {
     @IsBoolean({ message: '마케팅 수신여부는 true 또는 false여야 합니다.' })
     @IsOptional()
     marketingAgreed?: boolean;
-
 
 
     // 파트너 프로필 정보
@@ -239,15 +237,6 @@ export class SignupRequestDto {
     @IsString()
     nickname?: string;
 
-    @ApiPropertyOptional({
-        description: '전문분야 - 파트너가입시 필수',
-        enum: RequestCategory, 
-        example: RequestCategory.AGREEMENT_DIVORCE_PROPERTY, 
-    })
-    @IsOptional()
-    @IsEnum(RequestCategory, { message: '유효하지 않은 전문분야입니다.' })
-    introduction: RequestCategory;
-
     @Transform(({ value }) => {
         if (value === undefined || value === null || value === '') return undefined;
         const n = Number(value);
@@ -260,39 +249,39 @@ export class SignupRequestDto {
     @IsOptional()
     @IsNumber()
     @Min(0, { message: '최소수임료는 0 이상이어야 합니다.' })
-    fee: number;
+    fee?: number;
 
 
     @ApiHideProperty()
     @Allow()
-    plainIdentity: string;
+    plainIdentity?: string;
     @ApiHideProperty()
     @Allow()
-    plainPassword: string;
+    plainPassword?: string;
     @ApiHideProperty()
     @Allow()
-    plainName: string;
+    plainName?: string;
     @ApiHideProperty()
     @Allow()
-    plainAddress: string;
+    plainAddress?: string;
     @ApiHideProperty()
     @Allow()
-    plainDetailAddress: string;
+    plainDetailAddress?: string;
     @ApiHideProperty()
     @Allow()
-    plainZipCode: string;
+    plainZipCode?: string;
     @ApiHideProperty()
     @Allow()
-    plainPhoneNumber: string;
+    plainPhoneNumber?: string;
 
     @ApiHideProperty()
     @Allow()
-    plainProviderUserId:string;
+    plainProviderUserId?:string;
     @ApiHideProperty()
     @Allow()
-    plainEmail: string
+    plainEmail?: string
     @ApiHideProperty()
     @Allow()
-    plainProfileImageUrl:string
+    plainProfileImageUrl?:string
     
 }   

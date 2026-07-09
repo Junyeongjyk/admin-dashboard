@@ -32,3 +32,8 @@ export enum SignupPath {
   NORMAL = 'NORMAL',
   ADMIN = 'ADMIN',
 }
+
+export enum AuthType { //가입경로 유형
+  LOCAL = 'LOCAL',
+  SOCIAL = 'SOCIAL'
+}
