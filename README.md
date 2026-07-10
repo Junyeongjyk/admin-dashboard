@@ -1,7 +1,6 @@
 # Admin Dashboard
-
-관리자와 사용자를 분리한 데이터 관리 시스템입니다.  
-실제 서비스 환경을 고려하여 Admin / User / API 서버를 분리한 구조로 설계했습니다.
+Reate 기반의 프론트엔드와 NestJS(MVC 패턴 & 도메인 기반 구조) 백엔드로 구성된 관리자와 사용자를 분리한 데이터 관리 시스템입니다.  
+실제 서비스 환경을 고려하여 Admin / User / Server 를 분리한 구조로 설계했습니다.
 
 ---
 
@@ -49,8 +48,8 @@ admin-dashboard는 다음과 같은 구조로 구성되어 있습니다:
 - 검색 / 필터 / 페이지네이션
 
 ### 사용자(User)
-- 사용자 데이터 조회
-- (추가 기능 있으면 작성)
+- 대시보드와 일반적인 커뮤니티 사이트를 구성
+- 관리자와 소통가능한 채팅기능 추가 예정
 
 ---
 
@@ -70,9 +69,9 @@ admin-dashboard는 다음과 같은 구조로 구성되어 있습니다:
 ## ⚙️ 실행 방법
 
 # frontend
-npm install
-npm run dev
+-npm install 
+-npm run dev
 
 # backend
-npm install
-npm run start:dev
+-npm install 
+-npm run start:dev
