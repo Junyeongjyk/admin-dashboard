@@ -11,7 +11,7 @@ export class CommunityUserCreateRequestDto {
         required: true,
     })
     @IsEnum(CommunityPostType, { message: '유효하지 않은 카테고리입니다.' })
-    category: CommunityPostType;
+    category?: CommunityPostType;
 
     @ApiProperty({
         description: '제목',
@@ -20,7 +20,7 @@ export class CommunityUserCreateRequestDto {
     })
     @IsString()
     @IsNotEmpty({ message: 'title은 필수 입력값입니다.' })
-    title: string;
+    title?: string;
 
     @ApiProperty({
         description: '내용',
@@ -29,7 +29,7 @@ export class CommunityUserCreateRequestDto {
     })
     @IsString()
     @IsNotEmpty({ message: '내용은 필수 입력값입니다.' })
-    content: string;
+    content?: string;
 
     // @ApiPropertyOptional({
     //     description: '첨부파일 ID 목록 (파일업로드 API로 업로드 후 file_id 전달)',

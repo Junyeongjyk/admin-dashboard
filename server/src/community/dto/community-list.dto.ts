@@ -7,13 +7,13 @@ export class CommunityUserListRequestDto {
     @ApiProperty({
         description: '게시물 내용 유형(카테고리)',
         enum: CommunityCategory,
-        example: CommunityCategory.CLIENT,
+        example: CommunityCategory.USER,
         required: true
     })
     @IsEnum(CommunityCategory, {
         message: '유효하지 않은 게시물 카테고리입니다.',
     })
-    category: CommunityCategory;
+    category?: CommunityCategory;
 
     @ApiPropertyOptional({ description: '페이지', example: 1 })
     @IsOptional()

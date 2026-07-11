@@ -10,6 +10,6 @@ export class CommunityDeleteRequestDto {
     })
     @IsNumber()
     @IsNotEmpty({ message: '게시물 ID는 필수 입력값입니다.' })
-    postId: number;
+    postId?: number;
 
 }

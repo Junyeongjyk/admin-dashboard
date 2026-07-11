@@ -5,40 +5,40 @@ import { User } from "../../user/entity/user.entity";
 export class PartnerProfiles {
 
     @PrimaryGeneratedColumn()
-    id: number;
+    id?: number;
     
     /**
      * user.id (1:1)
      */
     @Column({ type: 'bigint', name: 'user_id' })
-    userId: number;
+    userId?: number;
 
     @OneToOne(() => User, { onDelete: 'CASCADE' })
     @JoinColumn({ name: 'user_id' })
-    user: User;
+    user?: User;
 
     @Column({ type: 'varchar', length: 50 })
-    nickname: string;
+    nickname?: string;
 
     @CreateDateColumn({
         type: 'timestamptz',
         name: 'created_at',
         default: () => 'CURRENT_TIMESTAMP',
     })
-    createdAt: Date;
+    createdAt?: Date;
 
     @UpdateDateColumn({
         type: 'timestamptz',
         name: 'updated_at',
         default: () => 'CURRENT_TIMESTAMP',
     })
-    updatedAt: Date;
+    updatedAt?: Date;
 
     @Column({
         name: 'profile_path',
         type: 'varchar',
         nullable: true,
     })
-    profilePath: string | null;
+    profilePath?: string | null;
 
 }

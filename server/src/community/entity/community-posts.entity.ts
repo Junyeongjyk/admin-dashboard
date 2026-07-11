@@ -6,31 +6,31 @@ import { CommunityComment } from "./community-comments.entity";
 export class CommunityPost {
 
     @PrimaryGeneratedColumn({ name: 'id' })
-    id: number;
+    id?: number;
 
     @Column({ name: 'type', type: 'varchar', length: 50, nullable: true })
-    type: string | null;
+    type?: string | null;
 
     @Column({ name: 'title', type: 'varchar', length: 200, nullable: false })
-    title: string;
+    title?: string;
 
     @Column({ name: 'content', type: 'text', nullable: true })
-    content: string | null;
+    content?: string | null;
 
     @Column({ name: 'author_id', type: 'bigint', nullable: false })
-    authorId: number; 
+    authorId?: number; 
 
     @Column({ name: 'view_count', type: 'int', nullable: true, default: () => '0' })
-    viewCount: number | null;
+    viewCount?: number | null;
 
     @Column({ name: 'like_count', type: 'int', nullable: true, default: () => '0' })
-    likeCount: number | null;
+    likeCount?: number | null;
 
     @Column({ name: 'is_hidden', type: 'boolean', nullable: true, default: () => 'false' })
-    isHidden: boolean | null;
+    isHidden?: boolean | null;
 
     @Column({ name: 'is_deleted', type: 'boolean', nullable: true, default: () => 'false' })
-    isDeleted: boolean | null;
+    isDeleted?: boolean | null;
 
     // DDL: DEFAULT CURRENT_TIMESTAMP (nullable true)
     // TypeORM에서 동일하게 맞추려면 CreateDateColumn/UpdateDateColumn 사용 + default 지정
@@ -40,7 +40,7 @@ export class CommunityPost {
         nullable: true,
         default: () => 'CURRENT_TIMESTAMP',
     })
-    createdAt: Date | null;
+    createdAt?: Date | null;
 
     @UpdateDateColumn({
         name: 'updated_at',
@@ -48,18 +48,18 @@ export class CommunityPost {
         nullable: true,
         default: () => 'CURRENT_TIMESTAMP',
     })
-    updatedAt: Date | null;
+    updatedAt?: Date | null;
 
     @Column({ name: 'main_image', type: 'varchar', nullable: true })
-    mainImage: string | null; 
+    mainImage?: string | null; 
 
     @Column({ name: 'category', type: 'varchar', length: 50, nullable: true })
-    category: string | null;
+    category?: string | null;
 
     @ManyToOne(() => User, { onDelete: 'NO ACTION', onUpdate: 'NO ACTION' })
     @JoinColumn({ name: 'author_id', referencedColumnName: 'id' })
-    author: User;
+    author?: User;
 
     @OneToMany(() => CommunityComment, (comment) => comment.post)
-    comments: CommunityComment[];
+    comments?: CommunityComment[];
 }

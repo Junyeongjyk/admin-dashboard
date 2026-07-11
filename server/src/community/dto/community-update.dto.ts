@@ -11,7 +11,7 @@ export class CommunityUserUpdateRequestDto {
     })
     @IsNumber()
     @IsNotEmpty({ message: '게시물 ID는 필수 입력값입니다.' })
-    postId: number;
+    postId?: number;
 
     @ApiProperty({
         description: '제목',
@@ -19,7 +19,7 @@ export class CommunityUserUpdateRequestDto {
     })
     @IsString()
     @IsNotEmpty({ message: '게시물 제목은 필수 입력값입니다.' })
-    title: string;
+    title?: string;
 
     @ApiProperty({
         description: '내용',
@@ -27,7 +27,7 @@ export class CommunityUserUpdateRequestDto {
     })
     @IsString()
     @IsNotEmpty({ message: '게시물 내용은 필수 입력값입니다.' })
-    content: string;
+    content?: string;
 
     @ApiProperty({
         description: '게시물 내용 유형(카테고리)',
@@ -36,6 +36,6 @@ export class CommunityUserUpdateRequestDto {
         required: true,
     })
     @IsEnum(CommunityPostType, { message: '유효하지 않은 카테고리입니다.' })
-    category: CommunityPostType;
+    category?: CommunityPostType;
     
 }

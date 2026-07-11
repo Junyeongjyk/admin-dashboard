@@ -11,7 +11,6 @@ export class CommunityCommentDeleteRequestDto {
     })
     @IsNumber()
     @IsNotEmpty({ message: '댓글 ID는 필수 입력값입니다.' })
-    commentId: number;
-
+    commentId?: number;
 
 }

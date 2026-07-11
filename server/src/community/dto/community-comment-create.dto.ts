@@ -11,7 +11,7 @@ export class CommunityCommentCreateRequestDto {
     })
     @IsNumber()
     @IsNotEmpty({ message: '게시물 ID는 필수 입력값입니다.' })
-    postId: number;
+    postId?: number;
 
     @ApiProperty({
         description: '댓글 내용',
@@ -20,7 +20,7 @@ export class CommunityCommentCreateRequestDto {
     })
     @IsString()
     @IsNotEmpty({ message: 'content는 필수 입력값입니다.' })
-    content: string;
+    content?: string;
 
     @ApiPropertyOptional({
         description: '부모 댓글 ID (대댓글일 때)',
@@ -29,5 +29,4 @@ export class CommunityCommentCreateRequestDto {
     @IsOptional()
     @IsNumber()
     parentId?: number;
-
 }
