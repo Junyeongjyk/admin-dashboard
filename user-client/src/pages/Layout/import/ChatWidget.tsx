@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import MessageSent from "src/pages/MessageSent/MessageSent";
+import MessageSent from "src/pages/MessageSent/DetailNoticePage";
 import "./ChatWidget.scss";
 
 export default function ChatWidget() {
