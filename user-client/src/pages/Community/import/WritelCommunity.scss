@@ -1,0 +1,119 @@
+.post {
+        width: 100%;
+        height: 100%;
+        margin: 2rem auto;
+        display: flex;
+        flex-direction: column;
+        // padding: 1rem;
+        // border: 2px solid #d5d5d5;
+
+        &__file.mobile {
+            display: none;
+        }
+
+        .title {
+            opacity: 0.8;
+            margin-bottom: 1rem;
+
+            &::placeholder {
+                opacity: 0.5;
+            }
+        }
+    }
+
+    .image-btn {
+        width: 60px;
+        height: 60px;
+        background: none;
+        border-radius: 8px;
+        color: var(--main-color);
+        font-size: 1.5rem;
+        margin: 2rem 0;
+        transition: all 0.4s;
+
+        p {
+            margin-top: 4px;
+            font-size: 12px;
+        }
+
+        &:hover {
+            background: var(--main-color);
+            color: #fff;
+        }
+    }
+
+    .opacity {
+        opacity: 0.5;
+    }
+
+    input, textarea, select {
+        border: 1px solid var(--border-color);
+        background: var(--background);
+        width: 100%;
+        box-sizing: border-box;
+        border-radius: 0;
+    }
+
+    select {
+        height: 46px;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+    }
+
+    input, textarea {
+        color: #c4c8ce;
+    }
+
+    p.title {
+        font-size: 1rem;
+        padding: 0;
+    }
+
+    input.title {
+
+        padding: 1rem;
+        border-radius: 8px;
+    }
+
+    textarea {
+        min-height: 400px;
+    }
+
+    .contents .title {
+        margin-bottom: 1rem;
+    }
+
+    .btn-box {
+        width: 100%;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        margin-top: 1rem;
+        gap: 10px;
+
+        button {
+            width: 100%;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: normal;
+            border-radius: 8px;
+        }
+
+        .cancel {
+            background: var(--background);
+            border-color: 1px solid var(--main-color);
+            color: var(--main-color);
+        }
+    }
+    @media screen and (max-width: 800px) {
+        .post {
+            margin: 0rem auto;
+
+            &__file.mobile {
+                display: block;
+            }
+        }
+    }
