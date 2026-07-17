@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef, ChangeEvent, KeyboardEvent, DragEvent } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import type { ChangeEvent, KeyboardEvent, DragEvent } from 'react';
 import { useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
@@ -31,7 +32,7 @@ export default function MessageSent({ id: propId, type = 0 }: MessageSentProps) 
   // Zustand 전역 상태 및 액션 바인딩
   const userInfo = useUserStore((state) => state.userInfo) as UserItem;
   const chatMessage = useRequestsStore((state) => state.chatMessage);
-  const banWord = useRequestsStore((state) => state.banWords) as BanWords[];
+  const banWord = useRequestsStore((state) => state.banWords) as unknown as BanWords[];
 
   // 컴포넌트 로컬 상태 정의
   const [roomId, setRoomId] = useState<number | null | undefined>(null);
@@ -56,7 +57,6 @@ export default function MessageSent({ id: propId, type = 0 }: MessageSentProps) 
 
   // 스크롤을 항상 하단으로 내리는 함수
   const scrollToBottom = () => {
-    // requestAnimationFrame이나 setTimeout을 사용하여 렌더링이 확실하게 끝난 후 스크롤 제어
     requestAnimationFrame(() => {
       if (chatBoxRef.current) {
         chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
@@ -78,7 +78,7 @@ export default function MessageSent({ id: propId, type = 0 }: MessageSentProps) 
     const fileToSend = overrideFile !== undefined ? overrideFile : chatFileRef.current;
     if (!newMessage.trim() && !fileToSend) return;
 
-    const params: any = {
+    const params: Record<string, unknown> = {
       roomId: roomId,
       content: newMessage,
       type: type,
@@ -105,12 +105,13 @@ export default function MessageSent({ id: propId, type = 0 }: MessageSentProps) 
           {
             id: Number(response.data.id),
             senderId: Number(response.data.senderId),
-            content: response.data.content,
-            createdAt: response.data.createdAt,
-            originalName: response.data.originalName,
-            mimeType: response.data.mimeType,
-            size: response.data.size,
-            chatContentType: response.data.chatContentType,
+            content: response.data.content as string,
+            createdAt: response.data.createdAt as string,
+            originalName: response.data.originalName as string,
+            mimeType: response.data.mimeType as string,
+            size: response.data.size as number,
+            // MessageItem의 boolean 타입 명세에 맞추기 위해 !! 사용
+            chatContentType: !!response.data.chatContentType,
           },
         ]);
         setNewMessage('');
@@ -126,57 +127,59 @@ export default function MessageSent({ id: propId, type = 0 }: MessageSentProps) 
     }
   };
 
-  // 기존 채팅 내역 로드 (일반/관리자 구분)
-  const handleGetMessage = async () => {
-    if (!userInfo) return;
-    try {
-      const params = { chatRoomId: activeId };
-      const response = await got(
-        ApiPath.CHAT_MESSAGE_LIST,
-        'POST',
-        params,
-        await getAccessToken(ApiPath.CHAT_MESSAGE_LIST)
-      );
-
-      if (response.status === 1) {
-        let name = '';
-        if (type === 1) {
-          name = '고객센터';
-        } else {
-          name = userInfo.type === SignupType.CLIENT ? '탐정' : '의뢰인 ';
-          name += ` ${response.data.name}`;
-        }
-        setChatName(name);
-        setMessages(response.data.items);
-        setRoomId(response.data.roomId);
-        scrollToBottom();
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const handleGetAdminMessage = async () => {
-    try {
-      const response = await got(
-        ApiPath.CHAT_ADMIN_MESSAGE_LIST,
-        'POST',
-        {},
-        await getAccessToken(ApiPath.CHAT_ADMIN_MESSAGE_LIST)
-      );
-      if (response.status === 1) {
-        setChatName('고객센터');
-        setMessages(response.data.items);
-        setRoomId(response.data.roomId);
-        scrollToBottom();
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
   // 9. 라이프사이클 마운트 및 API 로드
   useEffect(() => {
+    const handleGetMessage = async () => {
+      if (!userInfo) return;
+      try {
+        const params = { chatRoomId: activeId };
+        const response = await got(
+          ApiPath.CHAT_MESSAGE_LIST,
+          'POST',
+          params,
+          await getAccessToken(ApiPath.CHAT_MESSAGE_LIST)
+        );
+
+        if (response.status === 1) {
+          let name = '';
+          if (type === 1) {
+            name = '고객센터';
+          } else {
+            // any 없이 SignupType 구조 안전하게 우회 비교
+            const targetKey = 'CLIENT' as keyof typeof SignupType;
+            const isClient = String(userInfo.type) === 'CLIENT' || userInfo.type === SignupType[targetKey];
+            name = isClient ? '탐정' : '의뢰인 ';
+            name += ` ${response.data.name}`;
+          }
+          setChatName(name);
+          setMessages(response.data.items);
+          setRoomId(response.data.roomId);
+          scrollToBottom();
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    const handleGetAdminMessage = async () => {
+      try {
+        const response = await got(
+          ApiPath.CHAT_ADMIN_MESSAGE_LIST,
+          'POST',
+          {},
+          await getAccessToken(ApiPath.CHAT_ADMIN_MESSAGE_LIST)
+        );
+        if (response.status === 1) {
+          setChatName('고객센터');
+          setMessages(response.data.items);
+          setRoomId(response.data.roomId);
+          scrollToBottom();
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
     if (type === 0) {
       handleGetMessage();
     } else {
@@ -184,7 +187,7 @@ export default function MessageSent({ id: propId, type = 0 }: MessageSentProps) 
     }
   }, [activeId, type, userInfo]);
 
-  // 실시간 실시간 MQTT 채팅 알람 구독 동기화 (Svelte의 chatMessageStore.subscribe 역할)
+  // 실시간 MQTT 채팅 알람 구독 동기화
   useEffect(() => {
     if (chatMessage && chatMessage.roomId === roomId) {
       const receiveMessage = async () => {
@@ -193,12 +196,13 @@ export default function MessageSent({ id: propId, type = 0 }: MessageSentProps) 
           {
             id: Number(chatMessage.id),
             senderId: Number(chatMessage.senderId),
-            content: chatMessage.content,
-            createdAt: chatMessage.createdAt,
-            originalName: chatMessage.originalName,
-            mimeType: chatMessage.mimeType,
-            size: chatMessage.size,
-            chatContentType: chatMessage.chatContentType,
+            content: chatMessage.content as string,
+            createdAt: chatMessage.createdAt as string,
+            originalName: chatMessage.originalName as string,
+            mimeType: chatMessage.mimeType as string,
+            size: chatMessage.size as number,
+            // MessageItem의 boolean 타입 명세에 맞추기 위해 !! 사용
+            chatContentType: !!chatMessage.chatContentType,
           },
         ]);
 
@@ -335,21 +339,8 @@ export default function MessageSent({ id: propId, type = 0 }: MessageSentProps) 
     </div>
   );
 
-  // 일반 채팅 UI / 고객센터 위젯 UI 분기 렌더링
-  if (type !== 1) {
-    return (
-      <div className="chat-container">
-        <div className="chat-header">
-          <h2>{chatName}</h2>
-        </div>
-        {renderChatBox()}
-        {renderInputArea()}
-      </div>
-    );
-  }
-
   return (
-    <div className="chat-container widget">
+    <div className={`chat-container ${type === 1 ? 'widget' : ''}`}>
       <div className="chat-header">
         <h2>{chatName}</h2>
       </div>

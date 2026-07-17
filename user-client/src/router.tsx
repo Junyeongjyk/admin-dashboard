@@ -87,7 +87,7 @@ export const getRouter = (isLoggedIn: boolean) =>
         },
         {
           path: "setting/partner/profile",
-          element: isLoggedIn ? <Setting type={SettingType.DETECTIVE_PROFILE} /> : <Navigate to="/login" replace />,
+          element: isLoggedIn ? <Setting type={SettingType.PARTNER_PROFILE} /> : <Navigate to="/login" replace />,
         },
         {
           path: "community",
