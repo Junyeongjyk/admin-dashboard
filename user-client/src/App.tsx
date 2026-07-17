@@ -12,25 +12,30 @@ import { useUserStore } from './stores/userStore';
 import { useRequestsStore } from './stores/requests.store';
 import './styles/popup.scss';
 
+// connectRealtimeSub의 반환 타입을 동적으로 가져와 ref에 적용
+type MqttSocketType = ReturnType<typeof connectRealtimeSub>;
+
+// 💡 [해결] 스토어와 일치하는 JsonObject 타입을 정의합니다.
+type JsonObject = Record<string, unknown>;
+
 export default function App() {
-  //ESLint react-hooks/set-state-in-effect 에러 해결: 상태 초기화 시점에 안전하게 동기 주입
-  const [userInfo, setUserInfo] = useState<UserItem | null>(() => {
+  const [userInfo] = useState<UserItem | null>(() => {
     const myInfoCookie = getCookie('myInfo');
     if (myInfoCookie) {
       try {
         return JSON.parse(myInfoCookie) as UserItem;
-      } catch (e) {
+      } catch {
         return null;
       }
     }
     return null;
   });
 
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() => {
+  const [isLoggedIn] = useState<boolean>(() => {
     return !!getCookie('myInfo');
   });
 
-  const userSocketRef = useRef<any>(null);
+  const userSocketRef = useRef<MqttSocketType | null>(null);
 
   // Zustand 스토어 바인딩
   const setUserInfoStore = useUserStore((state) => state.setUserInfo);
@@ -40,7 +45,7 @@ export default function App() {
   const setBanWords = useRequestsStore((state) => state.setBanWords);
   const setChatMessage = useRequestsStore((state) => state.setChatMessage);
 
-  // 초기 로드 시 Zustand 스토어 동기화 (Svelte의 userInformation.set, hasCookie.set 대응)
+  // 초기 로드 시 Zustand 스토어 동기화
   useEffect(() => {
     setUserInfoStore(userInfo);
     setIsLoggedInStore(isLoggedIn);
@@ -67,18 +72,20 @@ export default function App() {
     if (!isLoggedIn || !userInfo) return;
     socketDisconnect();
 
-    // ✅ TS 2345 에러 해결: clientId 속성 추가 및 매개변수 바인딩 타입 단일화
+    const currentUserId = String(userInfo.id);
+
     userSocketRef.current = connectRealtimeSub({
       wsUrl: process.env.VITE_MQTT_WS_URL || '',
       topic: process.env.VITE_MQTT_TOPIC || '',
-      userId: String(userInfo.userId || userInfo.id),
-      clientId: `client_${userInfo.userId || userInfo.id}_${Date.now()}`,
+      userId: currentUserId,
+      clientId: `client_${currentUserId}_${Date.now()}`,
       username: userInfo.username || '',
       password: userInfo.password || '',
       onStatus: () => {},
       onEnvelope: (event: Envelope) => {
         if (event.event_type === EventType.CHAT_MESSAGE_CREATE) {
-          setChatMessage(event.payload);
+          // 💡 [해결] unknown 타입인 event.payload를 JsonObject로 안전하게 타입 단언
+          setChatMessage(event.payload as JsonObject);
         }
       },
     });
@@ -88,8 +95,8 @@ export default function App() {
   useEffect(() => {
     const init = async () => {
       const getCategory = async () => {
-        // ✅ ApiPath 내에 REQUESTS_CATEGORY가 없을 시 백업 경로를 지정해 2339 오류 예방
-        const path = (ApiPath as any).REQUESTS_CATEGORY || '/requests/category';
+        const apiPathRecord = ApiPath as Record<string, string>;
+        const path = apiPathRecord.REQUESTS_CATEGORY || '/requests/category';
         const res = await got(path);
         if (res.status === 1) {
           const sortedList = (res.data as Category[]).slice().sort((a, b) => a.sort - b.sort);
@@ -100,14 +107,16 @@ export default function App() {
       const getSystemOption = async () => {
         const res = await got(ApiPath.SYSTEM_OPTION);
         if (res.status === 1) {
-          setSystemOption(res.data);
+          // 💡 [해결] unknown인 res.data를 JsonObject로 안전하게 타입 단언
+          setSystemOption(res.data as JsonObject);
         }
       };
 
       const getBanWords = async () => {
         const res = await got(ApiPath.BAN_WORDS);
         if (res.status === 1) {
-          setBanWords(res.data);
+          // banWords는 string[] 타입이므로 안전하게 타입 단언
+          setBanWords(res.data as string[]);
         }
       };
 

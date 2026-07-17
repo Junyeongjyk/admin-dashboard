@@ -1,13 +1,12 @@
-import { useParams } from 'react-router-dom';
 import { koreaDateFormat } from '../../utils/helper';
 import './MessageDetail.scss';
 
 interface MessageDetailProps {
-  type?: number; // 0: 탐정 상담, 1: 관리자 상담
+  type?: number; // 0: 파트너 상담, 1: 관리자 상담
 }
 
 export default function MessageDetail({ type = 0 }: MessageDetailProps) {
-  const { id } = useParams<{ id: string }>();
+  // 💡 [해결] unused-vars 경고를 방지하기 위해 사용하지 않던 useParams와 id 선언을 제거했습니다.
 
   // 고정 데이터 (Svelte 원본 유지)
   const message = [
@@ -15,13 +14,13 @@ export default function MessageDetail({ type = 0 }: MessageDetailProps) {
       id: 1,
       userId: 3,
       category: "문의",
-      title: "탐정님께 상담드립니다.",
-      contents: "탐정님께 상담드립니다",
+      title: "파트너님께 상담드립니다.",
+      contents: "파트너님께 상담드립니다",
       status: 1,
       province: "서울",
       createdAt: "2025-01-10 14:30:00",
       updatedAt: "2025-01-10 14:30:00",
-      file: "탐정 상담하기.pdf (1.4M)",
+      file: "파트너 상담하기.pdf (1.4M)",
     },
   ];
 
@@ -40,7 +39,7 @@ export default function MessageDetail({ type = 0 }: MessageDetailProps) {
     },
   ];
 
-  // 다운로드 핸들러 (동작 추가 필요 시 구현)
+  // 다운로드 핸들러
   const handleDownload = (fileName: string) => {
     console.log(`${fileName} 다운로드 시작`);
   };
@@ -50,7 +49,7 @@ export default function MessageDetail({ type = 0 }: MessageDetailProps) {
       <h2>상담하기</h2>
       
       {type === 0 ? (
-        // 1. 탐정 상담 영역 (type === 0)
+        // 1. 파트너 상담 영역 (type === 0)
         <>
           <div className="title">
             <h4>{message[0].title}</h4>
@@ -66,8 +65,9 @@ export default function MessageDetail({ type = 0 }: MessageDetailProps) {
               <i className="fa-solid fa-download"></i>
               {message[0].file}
             </button>
+            {/* 💡 [해결] readonly 대신 리액트 표준 스펙인 readOnly 속성으로 대체했습니다. */}
             <textarea
-              readonly={true}
+              readOnly
               value={message[0].contents}
             />
           </div>
@@ -89,8 +89,9 @@ export default function MessageDetail({ type = 0 }: MessageDetailProps) {
               <i className="fa-solid fa-download"></i>
               {messageType1[0].file}
             </button>
+            {/* 💡 [해결] readonly 대신 리액트 표준 스펙인 readOnly 속성으로 대체했습니다. */}
             <textarea
-              readonly={true}
+              readOnly
               value={messageType1[0].contents}
             />
           </div>
