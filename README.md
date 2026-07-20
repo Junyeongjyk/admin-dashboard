@@ -20,10 +20,10 @@ React 기반의 프론트엔드와 NestJS(MVC 패턴 & 도메인 기반 구조) 
 - TypeScript
 
 ### Backend
-- NestJS
+- NestJS, TypeScript
 
-### Database
-- MySQL
+### Database & ORM
+- MySQL, TypeORM
 
 ---
 
