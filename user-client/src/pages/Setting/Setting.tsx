@@ -5,13 +5,14 @@ import { deleteCookie, getAccessToken, got } from 'utils/helper';
 import { ApiPath } from "src/types/enum/apiEnum";
 import { validateAuthCode, validatePhoneNumber, validateEmail, validateStringBasic, validatePassword } from "src/utils/validate";
 import { createKey, encrypt, getDecryptData } from "src/utils/aes.utils";
-import type { UserInfo, UserItem } from 'src/types/user.type';
+import type { UserInfo } from 'src/types/user.type';
 import { SignupType } from 'src/types/enum/userEnum';
 import { SettingType, ToggleStatus } from 'src/types/enum/ethEnum';
 import PostcodeEmbed from 'src/utils/PostcodeEmbed';
 import PartnerProfile from './import/PartnerProfile';
 import Profile from './import/Profile';
-import { userInfomation, hasCookie } from 'src/stores/userStore';
+import { useUserStore } from 'src/stores/userStore';
+import "./Setting.scss";
 
 interface SettingPageProps {
   type: SettingType;
@@ -19,6 +20,7 @@ interface SettingPageProps {
 
 export const SettingPage: React.FC<SettingPageProps> = ({ type }) => {
   const navigate = useNavigate();
+  const { userInfo, setUserInfo, setHasCookie } = useUserStore();
 
   // Form States
   const [username, setUsername] = useState<string>('');
@@ -31,7 +33,7 @@ export const SettingPage: React.FC<SettingPageProps> = ({ type }) => {
   const [alarmMode, setAlarmMode] = useState<ToggleStatus>(ToggleStatus.OFF);
   const [twoFactorMode, setTwoFactorMode] = useState<ToggleStatus>(ToggleStatus.OFF);
 
-  const [clientType, setClientType] = useState<string>(SignupType.CLIENT);
+  const [clientType, setClientType] = useState<string>(SignupType.USER);
 
   // Validation & Error States
   const [emailError, setEmailError] = useState<string>('');
@@ -67,17 +69,6 @@ export const SettingPage: React.FC<SettingPageProps> = ({ type }) => {
   const [emailAuthValie, setEmailAuthValie] = useState<boolean>(false);
 
   const [usersInformation, setUsersInformation] = useState<UserInfo>({} as UserInfo);
-  const [userInfo, setUserInfo] = useState<UserItem | null>(null);
-
-  // Store Subscribe (Svelte의 userInfomation.subscribe 대응)
-  useEffect(() => {
-    const unsubscribe = userInfomation.subscribe((value: UserItem | null) => {
-      setUserInfo(value);
-    });
-    return () => {
-      if (typeof unsubscribe === 'function') unsubscribe();
-    };
-  }, []);
 
   // Timer Cleanup on Unmount
   useEffect(() => {
@@ -333,14 +324,14 @@ export const SettingPage: React.FC<SettingPageProps> = ({ type }) => {
     const result = await popupAsync("회원탈퇴 하시겠습니까?", 3);
     if (!result) return;
 
-    const deviceId = userInfo?.clientId!.replace(/^CLIENT-\d+-/, "");
+    const deviceId = userInfo?.clientId?.replace(/^USER-\d+-/, "");
     const params = { deviceId };
 
     const response = await got(ApiPath.USER_INFO, 'DELETE', params, await getAccessToken(ApiPath.USER_INFO));
     if (response.status === 1) {
       deleteCookie('myInfo');
-      userInfomation.set(null);
-      hasCookie.set(false);
+      setUserInfo(null);
+      if (setHasCookie) setHasCookie(false);
       navigate("/", { replace: false });
       window.location.reload();
     } else {
@@ -371,7 +362,6 @@ export const SettingPage: React.FC<SettingPageProps> = ({ type }) => {
     }
   };
 
-  // Svelte의 `$: password = password.replace(/\s+/g, '');` 처리
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value.replace(/\s+/g, ''));
   };
@@ -413,7 +403,6 @@ export const SettingPage: React.FC<SettingPageProps> = ({ type }) => {
     }
   };
 
-  // onMount 대응
   useEffect(() => {
     handleGetInfo();
   }, []);
@@ -468,6 +457,7 @@ export const SettingPage: React.FC<SettingPageProps> = ({ type }) => {
                   )}
                 </div>
               )}
+              {identityError && <p className="error-message">{identityError}</p>}
             </div>
             <div className="input-group">
               <p>비밀번호 <b>*</b></p>
@@ -484,6 +474,7 @@ export const SettingPage: React.FC<SettingPageProps> = ({ type }) => {
                 value={passwordConfirm}
                 onChange={(e) => setPasswordConfirm(e.target.value)}
               />
+              {passwordError && <p className="error-message">{passwordError}</p>}
             </div>
             <div className="button-group">
               <button type="button" className="update" onClick={handleUpdate}>
