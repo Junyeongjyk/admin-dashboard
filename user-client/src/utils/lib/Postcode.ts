@@ -1,6 +1,14 @@
+interface KakaoWindow {
+    Postcode: new (options: {
+        oncomplete?: (data: PostcodeData) => void;
+    }) => {
+        open(): void;
+    };
+}
+
 declare global {
     interface Window {
-        kakao?: any;
+        kakao?: KakaoWindow;
     }
 }
 
