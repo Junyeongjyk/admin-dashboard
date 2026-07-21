@@ -67,7 +67,7 @@ export class ChatUserService {
 
                 const partnerInfo = await this.userRepository.findByIdInfo(dto.chatRoomId)
                 if (!partnerInfo) {
-                    throw new NotFoundException('탐정이 존재하지 않습니다.')
+                    throw new NotFoundException('파트너이 존재하지 않습니다.')
                 }
 
                 roomInfo =  await this.chatRepository.findUserRoomInfo(token.id, dto.chatRoomId)
@@ -87,7 +87,7 @@ export class ChatUserService {
 
                 const userInfo = await this.userRepository.findByIdInfo(roomInfo.participantAId)
                 if (!userInfo) {
-                    throw new NotFoundException('의뢰인이 존재하지 않습니다.')
+                    throw new NotFoundException('유저이 존재하지 않습니다.')
                 }
             
                 chatData.name = userInfo.name

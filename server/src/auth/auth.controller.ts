@@ -37,7 +37,7 @@ export class AuthController {
     @HttpCode(HttpStatus.OK)
     @ApiStdResponses({
         summary: '회원 가입(신청)',
-        description: '일반(의뢰인)가입, 탐정 가입신청',
+        description: '일반(유저)가입, 파트너 가입신청',
         okExampleCode: 'SUCCESS',
         okExampleMessage: '요청 성공',
         // /okDataDto: SignupRequestDto
@@ -106,7 +106,7 @@ export class AuthController {
     @HttpCode(HttpStatus.OK)
     @ApiStdResponses({
         summary: '일반 로그인',
-        description: '일반(의뢰인), 탐정, 관리자 로그인',
+        description: '일반(유저), 파트너, 관리자 로그인',
         okExampleCode: 'SUCCESS',
         okExampleMessage: '요청 성공',
         okDataDto: SigninResponseDto,

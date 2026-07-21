@@ -33,7 +33,7 @@ export class ChatUserSendRequestDto {
         return Number.isNaN(n) ? value : n;
     })
     @ApiProperty({
-        description: '상대방ID - 의뢰인이 첫 채팅 시도시',
+        description: '상대방ID - 유저이 첫 채팅 시도시',
         example: 1,
         required: false
     })
@@ -58,7 +58,7 @@ export class ChatUserSendRequestDto {
         return Number.isNaN(n) ? value : n;
     })
     @ApiProperty({
-        description: '상담유형 0: 의뢰인 <-> 탐정, 1: 의뢰인/탐정 <-> 관리자' ,
+        description: '상담유형 0: 유저 <-> 파트너, 1: 유저/파트너 <-> 관리자' ,
         example: 1,
         required: false
     })

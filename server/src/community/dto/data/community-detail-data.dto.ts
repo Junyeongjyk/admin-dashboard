@@ -57,7 +57,7 @@ export class CommunityUserDetailResponseDto extends CommunityUserListItem{
 
     @ApiProperty({
         description: '커뮤니티 내용', 
-        example: '탐정 추천해주세요',
+        example: '파트너 추천해주세요',
         required: false
     })
     content?: string

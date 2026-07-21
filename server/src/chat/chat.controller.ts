@@ -27,7 +27,7 @@ export class ChatClientController {
     @HttpCode(HttpStatus.OK)
     @ApiStdResponses({
         summary: '채팅 상대방 리스트',
-        description: '의뢰인/탐정 상대 리스트 조회',
+        description: '유저/파트너 상대 리스트 조회',
         okExampleCode: 'SUCCESS',
         okExampleMessage: '요청 성공',
         okDataDto: ChatListDataResponseDto
@@ -43,7 +43,7 @@ export class ChatClientController {
     @HttpCode(HttpStatus.OK)
     @ApiStdResponses({
         summary: '채팅내역 조회',
-        description: '의뢰인/탐정 상담 메세지 내역 조회',
+        description: '유저/파트너 상담 메세지 내역 조회',
         okExampleCode: 'SUCCESS',
         okExampleMessage: '요청 성공',
         okDataDto:ChatMassgeDataResponseDto,
@@ -60,7 +60,7 @@ export class ChatClientController {
     @HttpCode(HttpStatus.OK)
     @ApiStdResponses({
         summary: '관리자 상담내역 조회',
-        description: '의뢰인/탐정 <-> 관리자 상탐 메세지 내역 조회',
+        description: '유저/파트너 <-> 관리자 상탐 메세지 내역 조회',
         okExampleCode: 'SUCCESS',
         okExampleMessage: '요청 성공',
         okDataDto:ChatMassgeDataResponseDto,
@@ -75,7 +75,7 @@ export class ChatClientController {
     @HttpCode(HttpStatus.OK)
     @ApiStdResponses({
         summary: '채팅 메세지전송',
-        description: '의뢰인/탐정 상탐 메세지 전송',
+        description: '유저/파트너 상탐 메세지 전송',
         okExampleCode: 'SUCCESS',
         okExampleMessage: '요청 성공',
         okDataDto: ChatSendResponseDto,

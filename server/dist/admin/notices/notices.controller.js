@@ -93,7 +93,7 @@ __decorate([
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),
     (0, api_response_decorator_1.ApiStdResponses)({
         summary: '공지사항 등록',
-        description: '공지사항 등록(대상: 파트너/의뢰인/전체, 필수 공지 여부 포함)',
+        description: '공지사항 등록(대상: 파트너/유저/전체, 필수 공지 여부 포함)',
         okExampleCode: 'SUCCESS',
         okExampleMessage: '요청 성공',
         requestBodyDtos: [notices_create_dto_1.NoticesCreateRequestDto],

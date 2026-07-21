@@ -8,7 +8,11 @@ export enum ApiPath{
     FAQS_LIST = '/api/v1/faqs', // FAQ 리스트 조회
     USER_INFO = '/api/v1/user/me', // 로그인 회원정보 조회/수정/삭제
     USER_PASSWORD = '/api/v1/user/me/password', // 패스워드변경
-    DETECTIVE_INFO = '/api/v1/detectives/me', //로그인 탐정정보 조회/수정/삭제
+    VERIFY_EMAIL = "/api/v1/user/email/verify",
+    VERIFY_PHONE = "/api/v1/user/phone/verify",
+    CONFIRM_EMAIL = "/api/v1/user/email/confirm",
+    CONFIRM_PHONE = "/api/v1/user/phone/confirm",
+    PARTNER_INFO = '/api/v1/partner/me', //로그인 파트너정보 조회/수정/삭제
     COMMUNITY_POST_INFO = '/api/v1/community/posts', //커뮤니티 내용 등록, 수정, 삭제
     COMMUNITY_POST_LIST = '/api/v1/community/posts/list', //커뮤니티 리스트 조회
     COMMUNITY_COMMENT = '/api/v1/community/posts/comments', //커뮤니티 댓글 등록, 삭제
@@ -17,7 +21,7 @@ export enum ApiPath{
     ALARM_SELECT = '/api/v1/auth/alarm/select',//알람 조회 의뢰 관련
     ALARM_OFF = '/api/v1/auth/alarm/off', //개별 알람 끄기
     CHAT_LIST = '/api/v1/chat/list', //상대방 조회
-    CHAT_MESSAGE_LIST = '/api/v1/chat/messages', //의뢰/탐정채팅 메세지 조회
+    CHAT_MESSAGE_LIST = '/api/v1/chat/messages', //의뢰/파트너채팅 메세지 조회
     CHAT_ADMIN_MESSAGE_LIST = '/api/v1/chat/admin/messages', //관리자채팅 메세지 조회
     CHAT_MESSAGE_SEND = '/api/v1/chat/send', //채팅 메세지 전송
     CHAT_MESSAGE_READ = '/api/v1/chat/read', //채팅 메세지 읽음처리

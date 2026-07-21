@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { popup, popupAsync } from 'utils/popup';
 import { deleteCookie, getAccessToken, got } from 'utils/helper';
 import { ApiPath } from "src/types/enum/apiEnum";
-import { validateAuthCode, validatePhoneNumber, validateEmail, validateStringBasic, validatePassword } from "src/utils/";
+import { validateAuthCode, validatePhoneNumber, validateEmail, validateStringBasic, validatePassword } from "src/utils/validate";
 import { createKey, encrypt, getDecryptData } from "src/utils/aes.utils";
 import type { UserInfo } from 'src/types/user.type';
 import { SignupType } from 'src/types/enum/userEnum';

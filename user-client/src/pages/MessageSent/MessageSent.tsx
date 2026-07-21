@@ -148,7 +148,7 @@ export default function MessageSent({ id: propId, type = 0 }: MessageSentProps) 
             // any 없이 SignupType 구조 안전하게 우회 비교
             const targetKey = 'CLIENT' as keyof typeof SignupType;
             const isClient = String(userInfo.type) === 'CLIENT' || userInfo.type === SignupType[targetKey];
-            name = isClient ? '탐정' : '의뢰인 ';
+            name = isClient ? '파트너' : '유저 ';
             name += ` ${response.data.name}`;
           }
           setChatName(name);
