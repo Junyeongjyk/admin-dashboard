@@ -41,7 +41,7 @@ export class CommunityListRequestDto {
     @ApiPropertyOptional({
         description: '커뮤니티 작성자 유형 (User / Partner)',
         enum: CommunityCategory,
-        example: CommunityCategory.User,
+        example: CommunityCategory.USER,
     })
     @IsOptional()
     @IsEnum(CommunityCategory, {

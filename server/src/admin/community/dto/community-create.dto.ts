@@ -11,7 +11,7 @@ export class CommunityCreateRequestDto {
         required: true,
     })
     @IsEnum(CommunityPostType, { message: '유효하지 않은 카테고리입니다.' })
-    category: CommunityPostType;
+    category?: CommunityPostType;
 
     @ApiProperty({
         description: '제목',
